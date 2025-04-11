@@ -3,11 +3,11 @@ import {
   View,
   ViewStyle,
   Text,
-  TextInput,
+  TextInput as RNTextInput,
   TextStyle,
   StyleSheet,
   StyleProp,
-  TextInputProps,
+  TextInputProps as RNTextInputProps,
   Pressable,
   PixelRatio,
   Platform,
@@ -15,7 +15,7 @@ import {
 } from "react-native";
 import { useTheme } from "@/context/ThemeContext";
 
-type MyTextInputProps = {
+type TextInputProps = {
   topLabel?: string;
   leftLabel?: string;
   leftIcon?: React.ReactElement;
@@ -34,9 +34,9 @@ type MyTextInputProps = {
   leftIconStyle?: StyleProp<ViewStyle>;
   rightIconStyle?: StyleProp<ViewStyle>;
   disabled?: boolean;
-} & TextInputProps;
+} & RNTextInputProps;
 
-export default function MyTextInput({
+const TextInput = ({
   topLabel,
   leftLabel,
   leftIcon,
@@ -59,9 +59,9 @@ export default function MyTextInput({
   onBlur,
   onFocus,
   ...props
-}: MyTextInputProps) {
+}: TextInputProps) => {
   const { theme } = useTheme();
-  const inputRef = useRef<TextInput>(null);
+  const inputRef = useRef<RNTextInput>(null);
   const [isFocused, setIsFocused] = useState(false);
   const [leftIconContainerWidth, setLeftIconContainerWidth] = useState(0);
 
@@ -204,7 +204,7 @@ export default function MyTextInput({
               !leftLabel && { paddingTop: containerPaddingTop },
             ]}
           >
-            <TextInput
+            <RNTextInput
               ref={inputRef}
               style={[styles.textInput, { color: baseTextColor }, textStyle]}
               placeholderTextColor={theme.colors.onSurfaceDisabled}
@@ -271,7 +271,9 @@ export default function MyTextInput({
       )}
     </View>
   );
-}
+};
+
+export default TextInput;
 
 const scaledSize = (baseSize: number) => {
   return Math.round(baseSize * PixelRatio.getFontScale());

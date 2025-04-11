@@ -1,7 +1,6 @@
 /*
 Reimplemented SafeAreaView due to issues with react-native-safe-area-context
-// https://github.com/AppAndFlow/react-native-safe-area-context/issues/114
-
+https://github.com/AppAndFlow/react-native-safe-area-context/issues/114
 */
 import { ReactNode, FunctionComponent } from "react";
 import { View, ViewStyle, StyleSheet } from "react-native";

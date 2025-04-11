@@ -44,6 +44,16 @@ export default function Home() {
             Check out the Text Input Component
           </Button>
         </Link>
+        <Link href="/text" asChild>
+          <Button
+            style={{
+              width: 350,
+              marginHorizontal: "auto",
+            }}
+          >
+            Check out the Text Component
+          </Button>
+        </Link>
       </ScrollView>
     </SafeAreaView>
   );

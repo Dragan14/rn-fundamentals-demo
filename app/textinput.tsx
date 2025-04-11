@@ -8,7 +8,7 @@ import { CircleUser } from "lucide-react-native";
 import { Pencil } from "lucide-react-native";
 import { CircleX } from "lucide-react-native";
 
-export default function ButtonScreen() {
+export default function TextInputScreen() {
   const [value, setValue] = useState("");
   const [value2, setValue2] = useState("");
   const [isEditing, setIsEditing] = useState(false);
