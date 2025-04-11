@@ -22,7 +22,7 @@ export default function ButtonScreen() {
           <Text
             style={{ textAlign: "center", fontWeight: "bold", fontSize: 18 }}
           >
-            Button Colors
+            Button Variants
           </Text>
           <Button variant="primary">Primary</Button>
           <Button variant="secondary">Secondary</Button>
@@ -52,7 +52,13 @@ export default function ButtonScreen() {
           >
             Right Icon
           </Button>
-          <Button variant="elevated" leftIcon={<PersonStanding />}></Button>
+          <Button
+            variant="elevated"
+            leftIcon={<PersonStanding />}
+            rightIcon={<Camera />}
+          >
+            Both Icons
+          </Button>
         </View>
         <View style={{ gap: 10, width: 350 }}>
           <Text
