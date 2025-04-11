@@ -27,6 +27,7 @@ export const blueLight = {
 
     background: "rgb(251, 252, 255)",
     onBackground: "rgb(26, 28, 30)",
+    inverseBackground: "rgb(251, 252, 255)",
     surface: "rgb(251, 252, 255)",
     onSurface: "rgb(26, 28, 30)",
 
@@ -85,6 +86,7 @@ export const blueDark = {
 
     background: "rgb(26, 28, 30)",
     onBackground: "rgb(227, 226, 230)",
+    inverseBackground: "rgb(227, 226, 230)",
     surface: "rgb(26, 28, 30)",
     onSurface: "rgb(227, 226, 230)",
 

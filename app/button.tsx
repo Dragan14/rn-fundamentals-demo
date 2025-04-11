@@ -10,8 +10,7 @@ export default function ButtonScreen() {
     <SafeAreaView disableTopSafeArea={true}>
       <ScrollView
         style={{
-          paddingTop: 20,
-          marginBottom: 10,
+          marginTop: 20,
           paddingHorizontal: 10,
         }}
         contentContainerStyle={{
@@ -19,35 +18,21 @@ export default function ButtonScreen() {
           alignItems: "center",
         }}
       >
-        <View style={{ gap: 10 }}>
+        <View style={{ gap: 10, width: 350 }}>
           <Text
             style={{ textAlign: "center", fontWeight: "bold", fontSize: 18 }}
           >
             Button Colors
           </Text>
-          <Button variant="primary" style={{ width: 350 }}>
-            Primary
-          </Button>
-          <Button variant="secondary" style={{ width: 350 }}>
-            Secondary
-          </Button>
-          <Button variant="tertiary" style={{ width: 350 }}>
-            Tertiary
-          </Button>
-          <Button variant="error" style={{ width: 350 }}>
-            Error
-          </Button>
-          <Button variant="success" style={{ width: 350 }}>
-            Success
-          </Button>
-          <Button variant="outlined" style={{ width: 350 }}>
-            Outlined
-          </Button>
-          <Button variant="elevated" style={{ width: 350 }}>
-            Elevated
-          </Button>
+          <Button variant="primary">Primary</Button>
+          <Button variant="secondary">Secondary</Button>
+          <Button variant="tertiary">Tertiary</Button>
+          <Button variant="error">Error</Button>
+          <Button variant="success">Success</Button>
+          <Button variant="outlined">Outlined</Button>
+          <Button variant="elevated">Elevated</Button>
         </View>
-        <View style={{ gap: 10 }}>
+        <View style={{ gap: 10, width: 350 }}>
           <Text
             style={{ textAlign: "center", fontWeight: "bold", fontSize: 18 }}
           >
@@ -56,51 +41,62 @@ export default function ButtonScreen() {
           <Button
             variant="primary"
             leftIcon={<PersonStanding />}
-            style={{ width: 350 }}
+            style={{ maxWidth: 350 }}
           >
             Left Icon
           </Button>
           <Button
             variant="outlined"
             rightIcon={<Camera />}
-            style={{ width: 350 }}
+            style={{ maxWidth: 350 }}
           >
             Right Icon
           </Button>
-          <Button
-            variant="elevated"
-            leftIcon={<PersonStanding />}
-            rightIcon={<Camera />}
-            style={{ width: 350 }}
-          >
-            Both Icons Icon
-          </Button>
+          <Button variant="elevated" leftIcon={<PersonStanding />}></Button>
         </View>
-        <View style={{ gap: 10 }}>
+        <View style={{ gap: 10, width: 350 }}>
           <Text
             style={{ textAlign: "center", fontWeight: "bold", fontSize: 18 }}
           >
             Additional Properties
           </Text>
-          <Button variant="tertiary" round={true} style={{ width: 350 }}>
+          <Button style={{ maxWidth: 350 }} disabled={true}>
+            Disabled
+          </Button>
+          <Button variant="tertiary" round={true}>
             Round
           </Button>
-          <Button variant="tertiary" loading={true} style={{ width: 350 }}>
+          <Button variant="tertiary" loading={true}>
             Loading
           </Button>
         </View>
-        <View style={{ gap: 10 }}>
+        <View style={{ gap: 10, width: 350 }}>
           <Text
             style={{ textAlign: "center", fontWeight: "bold", fontSize: 18 }}
           >
             Custom Styling
           </Text>
-          <Button color="orange" textColor="white" style={{ width: 350 }}>
-            Custom Button Color
+          <Button
+            color="orange"
+            textColor="white"
+            style={{ maxWidth: 150, borderRadius: 0, marginHorizontal: "auto" }}
+          >
+            Custom Button
           </Button>
-          <Button color="grey" textColor="blue" style={{ width: 350 }}>
-            Custom Text Color
-          </Button>
+          <Button
+            variant="elevated"
+            rightIcon={<Camera />}
+            round={true}
+            color="pink"
+            textColor="red"
+            style={{
+              width: 50,
+              height: 50,
+              borderRadius: 50,
+              marginHorizontal: "auto",
+            }}
+            contentContainerStyle={{ padding: 0 }}
+          ></Button>
         </View>
       </ScrollView>
     </SafeAreaView>

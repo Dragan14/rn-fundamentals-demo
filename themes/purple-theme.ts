@@ -27,6 +27,7 @@ export const purpleLight = {
 
     background: "rgb(255, 251, 255)",
     onBackground: "rgb(29, 27, 30)",
+    inverseBackground: "rgb(29, 27, 30)",
     surface: "rgb(255, 251, 255)",
     onSurface: "rgb(29, 27, 30)",
 
@@ -85,6 +86,7 @@ export const purpleDark = {
 
     background: "rgb(29, 27, 30)",
     onBackground: "rgb(231, 225, 229)",
+    inversebackground: "rgb(231, 225, 229)",
     surface: "rgb(29, 27, 30)",
     onSurface: "rgb(231, 225, 229)",
 

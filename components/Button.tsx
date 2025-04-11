@@ -147,19 +147,29 @@ const Button = forwardRef<View, ButtonProps>(
             <ActivityIndicator size="small" color={textColor} />
           ) : (
             <>
-              <View style={leftIconContainerStyle} pointerEvents="none">
-                {leftIcon && renderIcon(leftIcon)}
-              </View>
-              <View style={[styles.textContainer, textContainerStyle]}>
-                {children && (
+              {leftIcon && (
+                <View style={leftIconContainerStyle} pointerEvents="none">
+                  {renderIcon(leftIcon)}
+                </View>
+              )}
+              {children && (
+                <View
+                  style={[
+                    styles.textContainer,
+                    textContainerStyle,
+                    !leftIcon && !rightIcon && { flex: 1 },
+                  ]}
+                >
                   <Text style={[styles.text, { color: textColor }, textStyle]}>
                     {children}
                   </Text>
-                )}
-              </View>
-              <View style={rightIconContainerStyle} pointerEvents="none">
-                {rightIcon && renderIcon(rightIcon)}
-              </View>
+                </View>
+              )}
+              {rightIcon && (
+                <View style={rightIconContainerStyle} pointerEvents="none">
+                  {renderIcon(rightIcon)}
+                </View>
+              )}
             </>
           )}
         </View>
@@ -176,7 +186,6 @@ const styles = StyleSheet.create({
   button: {
     justifyContent: "center",
     alignItems: "center",
-    overflow: "hidden",
   },
   contentContainer: {
     flexDirection: "row",
