@@ -23,7 +23,7 @@ export default function TextInputScreen() {
             Text Variants
           </Text>
           <Text style={{ textAlign: "center" }} variant="default">
-            Default
+            Defaultasdsdadasdsadsasddsaddsadadsd
           </Text>
           <Text style={{ textAlign: "center" }} variant="primary">
             Primary Text

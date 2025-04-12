@@ -7,6 +7,7 @@ import {
   ViewStyle,
   StyleProp,
   TextStyle,
+  PixelRatio,
 } from "react-native";
 import { useTheme } from "@/context/ThemeContext";
 
@@ -39,6 +40,9 @@ const renderElementWithColor = (
   } else {
     return cloneElement(element, {
       color: element.props.color ?? color,
+      size:
+        (element.props.size && scaledSize(element.props.size)) ??
+        scaledSize(24),
     });
   }
 };
@@ -140,4 +144,8 @@ export const SegmentedControl: React.FC<SegmentedControlProps> = ({
       })}
     </View>
   );
+};
+
+const scaledSize = (baseSize: number) => {
+  return Math.round(baseSize * PixelRatio.getFontScale());
 };

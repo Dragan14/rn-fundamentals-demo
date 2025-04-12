@@ -9,6 +9,7 @@ import {
   ViewStyle,
   TextStyle,
   ActivityIndicator,
+  PixelRatio,
 } from "react-native";
 import { useTheme } from "@/context/ThemeContext";
 
@@ -112,6 +113,8 @@ const Button = forwardRef<View, ButtonProps>(
     const renderIcon = (icon: React.ReactElement) => {
       return cloneElement(icon, {
         color: icon.props.color ?? textColor,
+        size:
+          (icon.props.size && scaledSize(icon.props.size)) ?? scaledSize(24),
       });
     };
 
@@ -180,6 +183,10 @@ const Button = forwardRef<View, ButtonProps>(
 Button.displayName = "Button";
 
 export default Button;
+
+const scaledSize = (baseSize: number) => {
+  return Math.round(baseSize * PixelRatio.getFontScale());
+};
 
 const styles = StyleSheet.create({
   button: {

@@ -127,6 +127,7 @@ const TextInput = ({
   const renderIcon = (icon: React.ReactElement) => {
     return cloneElement(icon, {
       color: icon.props.color ?? baseTextColor,
+      size: (icon.props.size && scaledSize(icon.props.size)) ?? scaledSize(24),
     });
   };
 

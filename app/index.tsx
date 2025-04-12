@@ -3,6 +3,7 @@ import { Link } from "expo-router";
 import SafeAreaView from "@/components/SafeAreaView";
 import Button from "@/components/Button";
 import Text from "@/components/Text";
+import View from "@/components/View";
 
 export default function Home() {
   return (
@@ -14,57 +15,60 @@ export default function Home() {
         }}
         contentContainerStyle={{
           gap: 20,
+          alignItems: "center",
         }}
       >
-        <Text
-          style={{
-            fontSize: 20,
-            fontWeight: "bold",
-            textAlign: "center",
-          }}
-        >
-          React Native Fundamental Components
-        </Text>
-        <Link href="/button" asChild>
-          <Button
+        <View style={{ gap: 10, width: 350 }}>
+          <Text
             style={{
-              width: 350,
-              marginHorizontal: "auto",
+              fontSize: 20,
+              fontWeight: "bold",
+              textAlign: "center",
             }}
           >
-            Button Component
-          </Button>
-        </Link>
-        <Link href="/textinput" asChild>
-          <Button
-            style={{
-              width: 350,
-              marginHorizontal: "auto",
-            }}
-          >
-            Text Input Component
-          </Button>
-        </Link>
-        <Link href="/text" asChild>
-          <Button
-            style={{
-              width: 350,
-              marginHorizontal: "auto",
-            }}
-          >
-            Text Component
-          </Button>
-        </Link>
-        <Link href="/segmentedcontrol" asChild>
-          <Button
-            style={{
-              width: 350,
-              marginHorizontal: "auto",
-            }}
-          >
-            Segmented Control Component
-          </Button>
-        </Link>
+            React Native Fundamental Components
+          </Text>
+          <Link href="/text" asChild>
+            <Button
+              style={{
+                width: 350,
+                marginHorizontal: "auto",
+              }}
+            >
+              Text
+            </Button>
+          </Link>
+          <Link href="/textinput" asChild>
+            <Button
+              style={{
+                width: 350,
+                marginHorizontal: "auto",
+              }}
+            >
+              Text Input
+            </Button>
+          </Link>
+          <Link href="/button" asChild>
+            <Button
+              style={{
+                width: 350,
+                marginHorizontal: "auto",
+              }}
+            >
+              Button
+            </Button>
+          </Link>
+          <Link href="/segmentedcontrol" asChild>
+            <Button
+              style={{
+                width: 350,
+                marginHorizontal: "auto",
+              }}
+            >
+              Segmented Control
+            </Button>
+          </Link>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
