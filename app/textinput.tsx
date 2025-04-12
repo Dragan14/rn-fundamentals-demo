@@ -30,7 +30,7 @@ export default function TextInputScreen() {
           <Text
             style={{ textAlign: "center", fontWeight: "bold", fontSize: 18 }}
           >
-            Text Input Variants
+            Variants
           </Text>
           <Text
             style={{ textAlign: "center", fontWeight: "500", fontSize: 14 }}
@@ -161,18 +161,33 @@ export default function TextInputScreen() {
           >
             Additional Properties
           </Text>
+          <Text
+            style={{ textAlign: "center", fontWeight: "500", fontSize: 14 }}
+          >
+            Disabled
+          </Text>
           <TextInput
             placeholder="disabled"
             variant="outlined"
             disabled={true}
             retainErrorMessageSpace={false}
           />
+          <Text
+            style={{ textAlign: "center", fontWeight: "500", fontSize: 14 }}
+          >
+            Error Message
+          </Text>
           <TextInput
             placeholder="error message"
             variant="outlined"
             error={true}
             errorMessage="This is an error message"
           />
+          <Text
+            style={{ textAlign: "center", fontWeight: "500", fontSize: 14 }}
+          >
+            Character Counter
+          </Text>
           <TextInput
             value={value}
             onChangeText={setValue}

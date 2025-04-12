@@ -20,10 +20,10 @@ export default function TextInputScreen() {
           <Text
             style={{ textAlign: "center", fontWeight: "bold", fontSize: 18 }}
           >
-            Text Variants
+            Variants
           </Text>
           <Text style={{ textAlign: "center" }} variant="default">
-            Defaultasdsdadasdsadsasddsaddsadadsd
+            Default Text
           </Text>
           <Text style={{ textAlign: "center" }} variant="primary">
             Primary Text
@@ -45,10 +45,10 @@ export default function TextInputScreen() {
           <Text
             style={{ textAlign: "center", fontWeight: "bold", fontSize: 18 }}
           >
-            Link
+            Link Text
           </Text>
           <Text variant="primary" link={true} style={{ textAlign: "center" }}>
-            Click Me
+            Click Me or Hover Me
           </Text>
         </View>
       </ScrollView>

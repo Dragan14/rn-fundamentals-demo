@@ -81,15 +81,8 @@ export default function ButtonScreen() {
           <Text
             style={{ textAlign: "center", fontWeight: "bold", fontSize: 18 }}
           >
-            Custom Styling
+            Customisation Example
           </Text>
-          <Button
-            color="orange"
-            textColor="white"
-            style={{ maxWidth: 150, borderRadius: 0, marginHorizontal: "auto" }}
-          >
-            Custom Button
-          </Button>
           <Button
             variant="elevated"
             rightIcon={<Camera />}

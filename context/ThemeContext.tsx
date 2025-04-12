@@ -21,9 +21,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   const theme = useMemo(() => (isDark ? blueDark : blueLight), [isDark]);
 
-  useEffect(() => {
-    console.log("Device color scheme changed:", colorScheme);
-  }, [colorScheme]);
+  useEffect(() => {}, [colorScheme]);
 
   const contextValue = useMemo(
     () => ({
