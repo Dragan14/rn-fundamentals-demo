@@ -8,7 +8,16 @@ function App() {
   return (
     <SafeAreaProvider>
       <StatusBar backgroundColor={theme.colors.background} />
-      <Stack screenOptions={{ navigationBarColor: theme.colors.background }}>
+      <Stack
+        screenOptions={{
+          navigationBarColor: theme.colors.background,
+          headerStyle: {
+            backgroundColor: theme.colors.background,
+          },
+          headerTintColor: theme.colors.primary,
+          headerTitleStyle: { color: theme.colors.onBackground },
+        }}
+      >
         <Stack.Screen
           name="index"
           options={{ title: "Home", headerShown: false }}

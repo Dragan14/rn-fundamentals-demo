@@ -125,7 +125,6 @@ const TextInput = ({
 
   // Update the renderIcon logic to handle React elements
   const renderIcon = (icon: React.ReactElement) => {
-    console.log("Rendering icon:", icon);
     return cloneElement(icon, {
       color: icon.props.color ?? baseTextColor,
     });

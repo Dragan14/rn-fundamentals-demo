@@ -150,17 +150,21 @@ export default function TextInputScreen() {
             Custom Styling
           </MyText>
           <SegmentedControl
-            values={[<PlaneTakeoff size={40} />, <PlaneLanding size={40} />]}
+            values={[
+              <PlaneTakeoff size={40} color="black" />,
+              <PlaneLanding size={40} color="black" />,
+            ]}
             selectedIndices={selectedindices7}
             style={{ minHeight: 100 }}
             round={true}
-            tabStyle={{ borderColor: "red" }}
+            tabStyle={{ borderColor: "#FF474C" }}
             onTabPress={(index) => {
               setSelectedindices7([index]);
             }}
             activeTabStyle={{
-              backgroundColor: "pink",
+              backgroundColor: "#FF474C",
             }}
+            inactiveTabStyle={{ backgroundColor: "lightpink" }}
           />
         </View>
       </ScrollView>

@@ -1,7 +1,8 @@
-import { ScrollView, Text } from "react-native";
+import { ScrollView } from "react-native";
 import SafeAreaView from "@/components/SafeAreaView";
 import View from "@/components/View";
 import Button from "@/components/Button";
+import Text from "@/components/Text";
 import { Camera } from "lucide-react-native";
 import { PersonStanding } from "lucide-react-native";
 

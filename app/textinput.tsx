@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { ScrollView, Text } from "react-native";
+import { ScrollView } from "react-native";
 import SafeAreaView from "@/components/SafeAreaView";
 import View from "@/components/View";
 import TextInput from "@/components/TextInput";
+import Text from "@/components/Text";
 import { CircleCheckBig } from "lucide-react-native";
 import { CircleUser } from "lucide-react-native";
 import { Pencil } from "lucide-react-native";

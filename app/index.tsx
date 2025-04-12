@@ -1,7 +1,8 @@
-import { ScrollView, Text } from "react-native";
+import { ScrollView } from "react-native";
 import { Link } from "expo-router";
 import SafeAreaView from "@/components/SafeAreaView";
 import Button from "@/components/Button";
+import Text from "@/components/Text";
 
 export default function Home() {
   return (

@@ -1,30 +1,40 @@
-import React, { createContext, useContext, useState } from 'react';
-import { blueLight, blueDark } from '../themes/blue-theme';
+import { useColorScheme } from "react-native";
+import { createContext, useContext, useEffect, useMemo } from "react";
+import { blueLight, blueDark } from "../themes/blue-theme";
 
 type ThemeType = typeof blueLight;
 
 interface ThemeContextType {
   theme: ThemeType;
   isDark: boolean;
-  toggleTheme: () => void;
 }
 
 const ThemeContext = createContext<ThemeContextType>({
   theme: blueLight,
   isDark: false,
-  toggleTheme: () => {},
 });
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [isDark, setIsDark] = useState(false);
-  const theme = isDark ? blueDark : blueLight;
+  const colorScheme = useColorScheme();
 
-  const toggleTheme = () => {
-    setIsDark(!isDark);
-  };
+  const isDark = colorScheme === "dark";
+
+  const theme = useMemo(() => (isDark ? blueDark : blueLight), [isDark]);
+
+  useEffect(() => {
+    console.log("Device color scheme changed:", colorScheme);
+  }, [colorScheme]);
+
+  const contextValue = useMemo(
+    () => ({
+      theme,
+      isDark,
+    }),
+    [theme, isDark],
+  );
 
   return (
-    <ThemeContext.Provider value={{ theme, isDark, toggleTheme }}>
+    <ThemeContext.Provider value={contextValue}>
       {children}
     </ThemeContext.Provider>
   );
