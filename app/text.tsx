@@ -1,4 +1,4 @@
-import { ScrollView, Linking } from "react-native";
+import { ScrollView } from "react-native";
 import SafeAreaView from "@/components/SafeAreaView";
 import View from "@/components/View";
 import Text from "@/components/Text";

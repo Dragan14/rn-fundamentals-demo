@@ -17,6 +17,10 @@ function App() {
         <Stack.Screen name="textinput" options={{ title: "Text Input" }} />
         <Stack.Screen name="text" options={{ title: "Text" }} />
         <Stack.Screen
+          name="segmentedcontrol"
+          options={{ title: "Segmented Control" }}
+        />
+        <Stack.Screen
           name="+not-found"
           options={{ title: "Not Found", headerShown: false }}
         />

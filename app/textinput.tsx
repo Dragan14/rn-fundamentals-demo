@@ -185,7 +185,7 @@ export default function TextInputScreen() {
           <Text
             style={{ textAlign: "center", fontWeight: "bold", fontSize: 18 }}
           >
-            Customisation Options
+            Customisation Example
           </Text>
           <TextInput
             value={value2}

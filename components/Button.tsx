@@ -9,7 +9,6 @@ import {
   ViewStyle,
   TextStyle,
   ActivityIndicator,
-  PixelRatio,
 } from "react-native";
 import { useTheme } from "@/context/ThemeContext";
 

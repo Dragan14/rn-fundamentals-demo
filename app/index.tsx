@@ -31,7 +31,7 @@ export default function Home() {
               marginHorizontal: "auto",
             }}
           >
-            Check out the Button Component
+            Button Component
           </Button>
         </Link>
         <Link href="/textinput" asChild>
@@ -41,7 +41,7 @@ export default function Home() {
               marginHorizontal: "auto",
             }}
           >
-            Check out the Text Input Component
+            Text Input Component
           </Button>
         </Link>
         <Link href="/text" asChild>
@@ -51,7 +51,17 @@ export default function Home() {
               marginHorizontal: "auto",
             }}
           >
-            Check out the Text Component
+            Text Component
+          </Button>
+        </Link>
+        <Link href="/segmentedcontrol" asChild>
+          <Button
+            style={{
+              width: 350,
+              marginHorizontal: "auto",
+            }}
+          >
+            Segmented Control Component
           </Button>
         </Link>
       </ScrollView>
