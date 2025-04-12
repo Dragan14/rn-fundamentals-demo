@@ -2,6 +2,7 @@
   "name": "rn-fundamentals",
   "version": "1.0.0",
   "description": "CLI tool for adding React Native Fundamental components",
+  "private": false,
   "bin": "./dist/index.js",
   "scripts": {
     "build": "tsc",

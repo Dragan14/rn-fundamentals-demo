@@ -1,8 +1,3 @@
-/*
- * This component is part of the React Native Fundamentals library
- * https://github.com/dragan14/rn-fundamentals
- */
-
 import { forwardRef, useState, cloneElement } from "react"; // Import useState
 import {
   Pressable,

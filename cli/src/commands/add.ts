@@ -6,7 +6,16 @@ const TEMPLATES_DIR = path.join(__dirname, "../../templates");
 export async function copyComponent(componentName: string) {
   const componentDir = path.join(process.cwd(), "components");
 
-  if (!["Button"].includes(componentName)) {
+  if (
+    ![
+      "Button",
+      "Text",
+      "TextInput",
+      "SegmentedControl",
+      "View",
+      "SafeAreaView",
+    ].includes(componentName)
+  ) {
     throw new Error(`Component ${componentName} is not available`);
   }
 

@@ -2,6 +2,15 @@
 import { Command } from "commander";
 import { copyComponent } from "./commands/add";
 
+const AVAILABLE_COMPONENTS = [
+  "Button",
+  "Text",
+  "TextInput",
+  "SegmentedControl",
+  "View",
+  "SafeAreaView",
+];
+
 const program = new Command();
 
 program
@@ -11,10 +20,21 @@ program
 
 program
   .command("add")
-  .description("Add a component to your project")
-  .argument("<component>", "Component to add (Button)")
+  .description(
+    `Add a component to your project. Available components: ${AVAILABLE_COMPONENTS.join(
+      ", ",
+    )}`,
+  )
+  .argument("<component>", "Name of the component to add")
   .action(async (component) => {
     try {
+      if (!AVAILABLE_COMPONENTS.includes(component)) {
+        throw new Error(
+          `Invalid component. Available components: ${AVAILABLE_COMPONENTS.join(
+            ", ",
+          )}`,
+        );
+      }
       await copyComponent(component);
       console.log(`✅ Successfully added ${component} component`);
     } catch (error) {
