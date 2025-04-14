@@ -1,4 +1,4 @@
-import { useState, useCallback, cloneElement } from "react";
+import { useRef, useState, useCallback, cloneElement } from "react";
 import {
   View,
   ViewStyle,
@@ -61,6 +61,7 @@ const TextInput = ({
   ...props
 }: TextInputProps) => {
   const { theme } = useTheme();
+  const inputRef = useRef<RNTextInput>(null);
   const [isFocused, setIsFocused] = useState(false);
   const [leftIconContainerWidth, setLeftIconContainerWidth] = useState(0);
 
@@ -113,7 +114,14 @@ const TextInput = ({
 
   return (
     <View style={style}>
-      <Pressable disabled={disabled}>
+      <Pressable
+        onPress={() => {
+          if (!disabled) {
+            inputRef.current?.focus();
+          }
+        }}
+        disabled={disabled}
+      >
         {topLabel && (
           <Text
             style={[
@@ -181,6 +189,7 @@ const TextInput = ({
             ]}
           >
             <RNTextInput
+              ref={inputRef}
               style={[styles.textInput, { color: colors.text }, textStyle]}
               placeholderTextColor={theme.colors.onSurfaceDisabled}
               onBlur={(e) => {
