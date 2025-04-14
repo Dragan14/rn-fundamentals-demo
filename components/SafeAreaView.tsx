@@ -15,7 +15,7 @@ type SafeAreaViewProps = {
   style?: ViewStyle;
 } & ViewStyle;
 
-const SafeAreaView: FunctionComponent<SafeAreaViewProps> = ({
+const SafeAreaView = ({
   disableBottomSafeArea,
   disableTopSafeArea,
   disableSidesSafeArea,

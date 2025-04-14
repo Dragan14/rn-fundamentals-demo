@@ -54,13 +54,6 @@ export default function TextInputScreen() {
             leftLabel="Left Label"
             retainErrorMessageSpace={false}
           />
-          <TextInput
-            placeholder="clear"
-            variant="clear"
-            topLabel="Top Label"
-            leftLabel="Left Label"
-            retainErrorMessageSpace={false}
-          />
           <Text
             style={{ textAlign: "center", fontWeight: "500", fontSize: 14 }}
           >
@@ -80,13 +73,6 @@ export default function TextInputScreen() {
           <TextInput
             placeholder="outlined"
             variant="outlined"
-            leftLabel="Left Label"
-            retainErrorMessageSpace={false}
-          />
-          <TextInput
-            placeholder="outlined"
-            variant="outlined"
-            topLabel="Top Label"
             leftLabel="Left Label"
             retainErrorMessageSpace={false}
           />
@@ -113,13 +99,6 @@ export default function TextInputScreen() {
             leftLabel="Left Label"
             retainErrorMessageSpace={false}
           />
-          <TextInput
-            placeholder="solid"
-            variant="solid"
-            topLabel="Top Label"
-            leftLabel="Left Label"
-            retainErrorMessageSpace={false}
-          />
         </View>
         <View style={{ gap: 10, width: 350 }}>
           <Text
@@ -139,15 +118,6 @@ export default function TextInputScreen() {
           <TextInput
             placeholder="outlined"
             variant="outlined"
-            leftLabel="Left Label"
-            topLabel="Top Label"
-            leftIcon={<CircleUser />}
-            rightIcon={<CircleCheckBig />}
-            retainErrorMessageSpace={false}
-          />
-          <TextInput
-            placeholder="solid"
-            variant="solid"
             leftLabel="Left Label"
             topLabel="Top Label"
             leftIcon={<CircleUser />}

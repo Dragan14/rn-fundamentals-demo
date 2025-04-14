@@ -1,4 +1,4 @@
-import { useRef, useState, useCallback, cloneElement } from "react";
+import { useState, useCallback, cloneElement } from "react";
 import {
   View,
   ViewStyle,
@@ -61,95 +61,68 @@ const TextInput = ({
   ...props
 }: TextInputProps) => {
   const { theme } = useTheme();
-  const inputRef = useRef<RNTextInput>(null);
   const [isFocused, setIsFocused] = useState(false);
   const [leftIconContainerWidth, setLeftIconContainerWidth] = useState(0);
 
-  const handleLeftIconLayout = useCallback(
-    (event: LayoutChangeEvent) => {
-      const { width } = event.nativeEvent.layout;
-      if (width !== leftIconContainerWidth) {
-        setLeftIconContainerWidth(width);
-      }
-    },
-    [leftIconContainerWidth],
-  );
+  const handleLeftIconLayout = useCallback((event: LayoutChangeEvent) => {
+    setLeftIconContainerWidth(event.nativeEvent.layout.width);
+  }, []);
 
-  // Determine base text/label/icon colors based on variant
-  const borderColor = disabled
-    ? theme.colors.onSurfaceDisabled
-    : error
-      ? theme.colors.error
-      : isFocused
-        ? theme.colors.primary
-        : variant === "solid"
-          ? theme.colors.onSurfaceVariant
-          : theme.colors.onBackground;
-  const baseTextColor = disabled
-    ? theme.colors.onSurfaceDisabled
-    : variant === "solid"
-      ? theme.colors.onSurfaceVariant
-      : theme.colors.onBackground;
-  const containerBackgroundColor =
-    variant === "solid"
-      ? disabled
-        ? theme.colors.surfaceDisabled
-        : theme.colors.surfaceVariant
-      : "transparent";
-  const topLabelBackgroundColor =
-    variant === "solid" ? "transparent" : theme.colors.background;
+  const colors = {
+    border: disabled
+      ? theme.colors.onSurfaceDisabled
+      : error
+        ? theme.colors.error
+        : isFocused
+          ? theme.colors.primary
+          : variant === "solid"
+            ? theme.colors.onSurfaceVariant
+            : theme.colors.onBackground,
+    text: disabled
+      ? theme.colors.onSurfaceDisabled
+      : variant === "solid"
+        ? theme.colors.onSurfaceVariant
+        : theme.colors.onBackground,
+    container:
+      variant === "solid"
+        ? disabled
+          ? theme.colors.surfaceDisabled
+          : theme.colors.surfaceVariant
+        : "transparent",
+    topLabel: variant === "solid" ? "transparent" : theme.colors.background,
+  };
 
-  // Container border style based on variant
-  const containerBorder =
-    variant === "outlined"
-      ? {
-          ...styles.outlinedBorder,
-          borderColor,
-        }
-      : {
-          // clear and solid variants only have bottom border
-          ...styles.clearBorder,
-          borderBottomColor: borderColor,
-        };
-
-  // Adjust padding and icon positions based on variant
   const isOutlined = variant === "outlined";
-  const containerPaddingTop = isOutlined || !topLabel ? 0 : scaledSize(15);
-  const iconMarginTop = isOutlined || !topLabel ? 0 : scaledSize(-14);
-  const topLabelTop = isOutlined ? scaledSize(-8) : scaledSize(4);
-  const topLabelLeft = isOutlined
-    ? 9
-    : leftIcon && leftIconContainerWidth > 0
-      ? leftIconContainerWidth + 6
-      : 6;
+  const layout = {
+    containerPadding: isOutlined || !topLabel ? 0 : scaledSize(15),
+    iconMargin: isOutlined || !topLabel ? 0 : scaledSize(-14),
+    labelTop: isOutlined ? scaledSize(-8) : scaledSize(4),
+    labelLeft: isOutlined
+      ? 9
+      : leftIcon && leftIconContainerWidth > 0
+        ? leftIconContainerWidth + 6
+        : 6,
+  };
 
-  // Update the renderIcon logic to handle React elements
   const renderIcon = (icon: React.ReactElement) => {
     return cloneElement(icon, {
-      color: icon.props.color ?? baseTextColor,
+      color: icon.props.color ?? colors.text,
       size: (icon.props.size && scaledSize(icon.props.size)) ?? scaledSize(24),
     });
   };
 
   return (
     <View style={style}>
-      <Pressable
-        onPress={() => {
-          if (!disabled) {
-            inputRef.current?.focus();
-          }
-        }}
-        disabled={disabled}
-      >
+      <Pressable disabled={disabled}>
         {topLabel && (
           <Text
             style={[
               styles.topLabel,
               {
-                backgroundColor: topLabelBackgroundColor,
-                color: borderColor,
-                top: topLabelTop,
-                left: topLabelLeft,
+                backgroundColor: colors.topLabel,
+                color: colors.border,
+                top: layout.labelTop,
+                left: layout.labelLeft,
               },
               topLabelStyle,
             ]}
@@ -162,10 +135,10 @@ const TextInput = ({
         <View
           style={[
             styles.container,
-            containerBorder,
-            {
-              backgroundColor: containerBackgroundColor,
-            },
+            variant === "outlined"
+              ? { ...styles.outlinedBorder, borderColor: colors.border }
+              : { ...styles.clearBorder, borderBottomColor: colors.border },
+            { backgroundColor: colors.container },
             containerStyle,
           ]}
         >
@@ -173,7 +146,10 @@ const TextInput = ({
             <View
               style={[
                 styles.leftIcon,
-                { marginTop: iconMarginTop, paddingTop: containerPaddingTop },
+                {
+                  marginTop: layout.iconMargin,
+                  paddingTop: layout.containerPadding,
+                },
                 leftIconStyle,
               ]}
               onLayout={handleLeftIconLayout}
@@ -187,8 +163,8 @@ const TextInput = ({
                 styles.leftLabel,
                 {
                   backgroundColor: "transparent",
-                  color: borderColor,
-                  paddingTop: containerPaddingTop,
+                  color: colors.border,
+                  paddingTop: layout.containerPadding,
                 },
                 leftLabelStyle,
               ]}
@@ -201,12 +177,11 @@ const TextInput = ({
           <View
             style={[
               styles.textInputContainer,
-              !leftLabel && { paddingTop: containerPaddingTop },
+              !leftLabel && { paddingTop: layout.containerPadding },
             ]}
           >
             <RNTextInput
-              ref={inputRef}
-              style={[styles.textInput, { color: baseTextColor }, textStyle]}
+              style={[styles.textInput, { color: colors.text }, textStyle]}
               placeholderTextColor={theme.colors.onSurfaceDisabled}
               onBlur={(e) => {
                 setIsFocused(false);
@@ -226,7 +201,10 @@ const TextInput = ({
             <View
               style={[
                 styles.rightIcon,
-                { marginTop: iconMarginTop, paddingTop: containerPaddingTop },
+                {
+                  marginTop: layout.iconMargin,
+                  paddingTop: layout.containerPadding,
+                },
                 rightIconStyle,
               ]}
             >
@@ -258,7 +236,7 @@ const TextInput = ({
               style={[
                 styles.counter,
                 {
-                  color: baseTextColor,
+                  color: colors.text,
                 },
               ]}
             >
