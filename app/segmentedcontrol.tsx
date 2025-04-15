@@ -1,8 +1,8 @@
-import { ScrollView, Text } from "react-native";
+import { ScrollView, Text as RNText } from "react-native";
 import { useState } from "react";
 import SafeAreaView from "@/components/SafeAreaView";
 import View from "@/components/View";
-import MyText from "@/components/Text";
+import Text from "@/components/Text";
 import { SegmentedControl } from "@/components/SegmentedControl";
 import {
   Camera,
@@ -34,13 +34,13 @@ export default function TextInputScreen() {
         }}
       >
         <View style={{ gap: 10, width: 350 }}>
-          <MyText
+          <Text
             style={{ textAlign: "center", fontWeight: "bold", fontSize: 18 }}
           >
             Two Tabs
-          </MyText>
+          </Text>
           <SegmentedControl
-            values={[<Text>Tab One</Text>, <Text>Tab Two</Text>]}
+            values={[<RNText>Tab One</RNText>, <RNText>Tab Two</RNText>]}
             selectedIndices={selectedindices1}
             onTabPress={(index) => {
               setSelectedindices1([index]);
@@ -48,16 +48,16 @@ export default function TextInputScreen() {
           />
         </View>
         <View style={{ gap: 10, width: 350 }}>
-          <MyText
+          <Text
             style={{ textAlign: "center", fontWeight: "bold", fontSize: 18 }}
           >
             Three Tabs
-          </MyText>
+          </Text>
           <SegmentedControl
             values={[
-              <Text>Tab One</Text>,
-              <Text>Tab Two</Text>,
-              <Text>Tab Three</Text>,
+              <RNText>Tab One</RNText>,
+              <RNText>Tab Two</RNText>,
+              <RNText>Tab Three</RNText>,
             ]}
             selectedIndices={selectedindices2}
             onTabPress={(index) => {
@@ -66,16 +66,16 @@ export default function TextInputScreen() {
           />
         </View>
         <View style={{ gap: 10, width: 350 }}>
-          <MyText
+          <Text
             style={{ textAlign: "center", fontWeight: "bold", fontSize: 18 }}
           >
             Multiple Selections
-          </MyText>
+          </Text>
           <SegmentedControl
             values={[
-              <Text>Tab One</Text>,
-              <Text>Tab Two</Text>,
-              <Text>Tab Three</Text>,
+              <RNText>Tab One</RNText>,
+              <RNText>Tab Two</RNText>,
+              <RNText>Tab Three</RNText>,
             ]}
             selectedIndices={selectedindices3}
             onTabPress={(index) => {
@@ -90,19 +90,19 @@ export default function TextInputScreen() {
           />
         </View>
         <View style={{ gap: 10, width: 350 }}>
-          <MyText
+          <Text
             style={{ textAlign: "center", fontWeight: "bold", fontSize: 18 }}
           >
             Icons
-          </MyText>
+          </Text>
           <SegmentedControl
             values={[
               <>
                 <Camera />
-                <Text>Tab One</Text>
+                <RNText>Tab One</RNText>
               </>,
               <>
-                <Text>Tab Two</Text>
+                <RNText>Tab Two</RNText>
                 <PersonStanding />
               </>,
               <Star />,
@@ -114,14 +114,14 @@ export default function TextInputScreen() {
           />
         </View>
         <View style={{ gap: 10, width: 350 }}>
-          <MyText
+          <Text
             style={{ textAlign: "center", fontWeight: "bold", fontSize: 18 }}
           >
             Round
-          </MyText>
+          </Text>
           <SegmentedControl
             round={true}
-            values={[<Text>Tab One</Text>, <Text>Tab Two</Text>]}
+            values={[<RNText>Tab One</RNText>, <RNText>Tab Two</RNText>]}
             selectedIndices={selectedindices5}
             onTabPress={(index) => {
               setSelectedindices5([index]);
@@ -129,14 +129,14 @@ export default function TextInputScreen() {
           />
         </View>
         <View style={{ gap: 10, width: 350 }}>
-          <MyText
+          <Text
             style={{ textAlign: "center", fontWeight: "bold", fontSize: 18 }}
           >
             Disabled
-          </MyText>
+          </Text>
           <SegmentedControl
             disabled={true}
-            values={[<Text>Tab One</Text>, <Text>Tab Two</Text>]}
+            values={[<RNText>Tab One</RNText>, <RNText>Tab Two</RNText>]}
             selectedIndices={selectedindices6}
             onTabPress={(index) => {
               setSelectedindices6([index]);
@@ -144,11 +144,11 @@ export default function TextInputScreen() {
           />
         </View>
         <View style={{ gap: 10, width: 350 }}>
-          <MyText
+          <Text
             style={{ textAlign: "center", fontWeight: "bold", fontSize: 18 }}
           >
             Custom Styling
-          </MyText>
+          </Text>
           <SegmentedControl
             values={[
               <PlaneTakeoff size={40} color="black" />,

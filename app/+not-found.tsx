@@ -1,7 +1,7 @@
 import SafeAreaView from "@/components/SafeAreaView";
-import { Text } from "react-native";
 import { Link } from "expo-router";
 import Button from "@/components/Button";
+import Text from "@/components/Text";
 
 export default function NotFound() {
   return (

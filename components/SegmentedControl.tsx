@@ -88,7 +88,7 @@ export const SegmentedControl = ({
       justifyContent: "center",
       alignItems: "center",
       borderWidth: 1,
-      borderColor: theme.colors.outline,
+      borderColor: theme.colors.secondary,
       borderRightWidth: 0,
     },
     tabInactive: {

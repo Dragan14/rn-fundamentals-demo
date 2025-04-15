@@ -71,24 +71,24 @@ const TextInput = ({
 
   const colors = {
     border: disabled
-      ? theme.colors.onSurfaceDisabled
+      ? theme.colors.onBackgroundDisabled
       : error
         ? theme.colors.error
         : isFocused
           ? theme.colors.primary
           : variant === "solid"
-            ? theme.colors.onSurfaceVariant
+            ? theme.colors.onBackgroundVariant
             : theme.colors.onBackground,
     text: disabled
-      ? theme.colors.onSurfaceDisabled
+      ? theme.colors.backgroundDisabled
       : variant === "solid"
-        ? theme.colors.onSurfaceVariant
+        ? theme.colors.onBackgroundVariant
         : theme.colors.onBackground,
     container:
       variant === "solid"
         ? disabled
-          ? theme.colors.surfaceDisabled
-          : theme.colors.surfaceVariant
+          ? theme.colors.backgroundDisabled
+          : theme.colors.backgroundVariant
         : "transparent",
     topLabel: variant === "solid" ? "transparent" : theme.colors.background,
   };
@@ -191,7 +191,7 @@ const TextInput = ({
             <RNTextInput
               ref={inputRef}
               style={[styles.textInput, { color: colors.text }, textStyle]}
-              placeholderTextColor={theme.colors.onSurfaceDisabled}
+              placeholderTextColor={theme.colors.onBackgroundDisabled}
               onBlur={(e) => {
                 setIsFocused(false);
                 onBlur?.(e);

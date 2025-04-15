@@ -27,33 +27,14 @@ export const blueLight = {
 
     background: "rgb(251, 252, 255)",
     onBackground: "rgb(26, 28, 30)",
-    inverseBackground: "rgb(251, 252, 255)",
-    surface: "rgb(251, 252, 255)",
-    onSurface: "rgb(26, 28, 30)",
 
-    surfaceVariant: "rgb(222, 227, 235)",
-    onSurfaceVariant: "rgb(66, 71, 78)",
-    outline: "rgb(114, 119, 127)",
-    outlineVariant: "rgb(194, 199, 207)",
+    backgroundVariant: "rgb(222, 227, 235)",
+    onBackgroundVariant: "rgb(66, 71, 78)",
 
-    shadow: "rgb(0, 0, 0)",
-    scrim: "rgb(0, 0, 0)",
-    inverseSurface: "rgb(47, 48, 51)",
-    inverseOnSurface: "rgb(240, 240, 244)",
-    inversePrimary: "rgb(160, 200, 255)",
+    backgroundDisabled: "rgba(26, 28, 30, 0.12)",
+    onBackgroundDisabled: "rgba(26, 28, 30, 0.38)",
 
-    elevation: {
-      level0: "transparent",
-      level1: "rgb(240, 245, 253)",
-      level2: "rgb(234, 241, 252)",
-      level3: "rgb(227, 237, 251)",
-      level4: "rgb(225, 236, 251)",
-      level5: "rgb(220, 233, 250)",
-    },
-
-    surfaceDisabled: "rgba(26, 28, 30, 0.12)",
-    onSurfaceDisabled: "rgba(26, 28, 30, 0.38)",
-    backdrop: "rgba(45, 49, 56, 0.4)",
+    elevated: "rgb(240, 245, 253)",
   },
 };
 
@@ -86,32 +67,13 @@ export const blueDark = {
 
     background: "rgb(26, 28, 30)",
     onBackground: "rgb(227, 226, 230)",
-    inverseBackground: "rgb(227, 226, 230)",
-    surface: "rgb(26, 28, 30)",
-    onSurface: "rgb(227, 226, 230)",
 
-    surfaceVariant: "rgb(66, 71, 78)",
-    onSurfaceVariant: "rgb(194, 199, 207)",
-    outline: "rgb(140, 145, 153)",
-    outlineVariant: "rgb(66, 71, 78)",
+    backgroundVariant: "rgb(66, 71, 78)",
+    onBackgroundVariant: "rgb(194, 199, 207)",
 
-    shadow: "rgb(0, 0, 0)",
-    scrim: "rgb(0, 0, 0)",
-    inverseSurface: "rgb(227, 226, 230)",
-    inverseOnSurface: "rgb(47, 48, 51)",
-    inversePrimary: "rgb(0, 100, 210)",
+    backgroundDisabled: "rgba(227, 226, 230, 0.12)",
+    onBackgroundDisabled: "rgba(227, 226, 230, 0.38)",
 
-    elevation: {
-      level0: "transparent",
-      level1: "rgb(32, 36, 41)",
-      level2: "rgb(36, 41, 48)",
-      level3: "rgb(40, 46, 55)",
-      level4: "rgb(41, 48, 57)",
-      level5: "rgb(44, 52, 62)",
-    },
-
-    surfaceDisabled: "rgba(227, 226, 230, 0.12)",
-    onSurfaceDisabled: "rgba(227, 226, 230, 0.38)",
-    backdrop: "rgba(45, 49, 56, 0.4)",
+    elevated: "rgb(32, 36, 41)",
   },
 };

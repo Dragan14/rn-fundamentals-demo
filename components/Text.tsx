@@ -52,7 +52,7 @@ const Text = ({
       case "success":
         return theme.colors.success;
       default:
-        return theme.colors.onSurface;
+        return theme.colors.onBackground;
     }
   })();
 
