@@ -9,6 +9,7 @@ const AVAILABLE_COMPONENTS = [
   "SegmentedControl",
   "View",
   "SafeAreaView",
+  "theme",
 ];
 
 const program = new Command();

@@ -4,7 +4,34 @@ import path from "path";
 const TEMPLATES_DIR = path.join(__dirname, "../../templates");
 
 export async function copyComponent(componentName: string) {
-  const componentDir = path.join(process.cwd(), "components");
+  if (componentName === "theme") {
+    // Handle theme files
+    const contextDir = path.join(process.cwd(), "context");
+    const themesDir = path.join(process.cwd(), "themes");
+
+    // Ensure directories exist
+    await fs.ensureDir(contextDir);
+    await fs.ensureDir(themesDir);
+
+    // Copy theme context
+    await fs.copy(
+      path.join(TEMPLATES_DIR, "ThemeContext.tsx"),
+      path.join(contextDir, "ThemeContext.tsx"),
+    );
+
+    // Copy theme files
+    await fs.copy(
+      path.join(TEMPLATES_DIR, "blue-theme.json"),
+      path.join(themesDir, "blue-theme.json"),
+    );
+    await fs.copy(
+      path.join(TEMPLATES_DIR, "purple-theme.json"),
+      path.join(themesDir, "purple-theme.json"),
+    );
+    return;
+  }
+
+  const componentDir = path.join(process.cwd(), "components", "ui");
 
   if (
     ![
@@ -19,7 +46,7 @@ export async function copyComponent(componentName: string) {
     throw new Error(`Component ${componentName} is not available`);
   }
 
-  // Ensure the components directory exists
+  // Ensure the components/ui directory exists
   await fs.ensureDir(componentDir);
 
   // Copy the component file

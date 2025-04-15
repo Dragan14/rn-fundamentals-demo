@@ -59,7 +59,7 @@ interface SegmentedControlProps {
   disabled?: boolean;
 }
 
-export const SegmentedControl: React.FC<SegmentedControlProps> = ({
+export const SegmentedControl = ({
   values,
   selectedIndices,
   onTabPress,
@@ -69,7 +69,7 @@ export const SegmentedControl: React.FC<SegmentedControlProps> = ({
   inactiveTabStyle,
   round = false,
   disabled = false,
-}) => {
+}: SegmentedControlProps) => {
   const { theme } = useTheme();
 
   const borderRadius =
@@ -88,7 +88,7 @@ export const SegmentedControl: React.FC<SegmentedControlProps> = ({
       justifyContent: "center",
       alignItems: "center",
       borderWidth: 1,
-      borderColor: theme.colors.outline,
+      borderColor: theme.colors.secondary,
       borderRightWidth: 0,
     },
     tabInactive: {

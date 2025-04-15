@@ -1,4 +1,4 @@
-import { forwardRef, useState, cloneElement } from "react"; // Import useState
+import { useState, cloneElement, forwardRef, ForwardedRef } from "react";
 import {
   Pressable,
   PressableProps,
@@ -37,7 +37,7 @@ type ButtonProps = {
     | "elevated";
 } & PressableProps;
 
-const Button = forwardRef<View, ButtonProps>(
+const Button = forwardRef(
   (
     {
       children,
@@ -56,14 +56,14 @@ const Button = forwardRef<View, ButtonProps>(
       round = false,
       variant,
       ...props
-    },
-    ref,
+    }: ButtonProps,
+    ref: ForwardedRef<View>,
   ) => {
     const { theme } = useTheme();
     const [isHovered, setIsHovered] = useState(false);
 
     color = (() => {
-      if (disabled) return theme.colors.surfaceDisabled;
+      if (disabled) return theme.colors.backgroundDisabled;
       if (color) return color;
       switch (variant) {
         case "success":
@@ -79,14 +79,14 @@ const Button = forwardRef<View, ButtonProps>(
         case "tertiary":
           return theme.colors.tertiary;
         case "elevated":
-          return theme.colors.elevation.level5;
+          return theme.colors.elevated;
         default:
           return theme.colors.primary;
       }
     })();
 
     textColor = (() => {
-      if (disabled) return theme.colors.onSurfaceDisabled;
+      if (disabled) return theme.colors.onBackgroundDisabled;
       if (textColor) return textColor;
       switch (variant) {
         case "success":
@@ -127,7 +127,7 @@ const Button = forwardRef<View, ButtonProps>(
           { borderRadius: borderRadius },
           variant === "outlined" && {
             borderWidth: 1,
-            borderColor: theme.colors.outline,
+            borderColor: theme.colors.primary,
           },
           !disabled && isHovered && styles.hovered,
           !disabled && pressed && styles.pressed,
