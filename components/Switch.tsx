@@ -32,7 +32,24 @@ const Switch = ({ variant, disabled = false, ...props }: SwitchProps) => {
     }
   })();
 
-  const offTrackColor = theme.colors.backgroundDisabled;
+  // Calculated background color
+  const offTrackColor = (() => {
+    if (disabled) return theme.colors.backgroundDisabled;
+    switch (variant) {
+      case "success":
+        return theme.colors.elevatedSuccess;
+      case "error":
+        return theme.colors.elevatedError;
+      case "primary":
+        return theme.colors.elevatedPrimary;
+      case "secondary":
+        return theme.colors.elevatedSecondary;
+      case "tertiary":
+        return theme.colors.elevatedTertiary;
+      default:
+        return theme.colors.elevatedPrimary;
+    }
+  })();
 
   // Thumb color
   const thumbColor = (() => {

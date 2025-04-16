@@ -4,10 +4,13 @@ import SafeAreaView from "@/components/SafeAreaView";
 import View from "@/components/View";
 import Text from "@/components/Text";
 import Switch from "@/components/Switch";
-import { Star } from "lucide-react-native";
 
 export default function SwitchScreen() {
-  const [isEnabled, setIsEnabled] = useState(true);
+  const [isEnabled1, setIsEnabled1] = useState(true);
+  const [isEnabled2, setIsEnabled2] = useState(true);
+  const [isEnabled3, setIsEnabled3] = useState(true);
+  const [isEnabled4, setIsEnabled4] = useState(true);
+  const [isEnabled5, setIsEnabled5] = useState(true);
   return (
     <SafeAreaView disableTopSafeArea={true}>
       <ScrollView
@@ -34,8 +37,8 @@ export default function SwitchScreen() {
           </Text>
           <Switch
             variant="primary"
-            value={isEnabled}
-            onValueChange={() => setIsEnabled(!isEnabled)}
+            value={isEnabled1}
+            onValueChange={() => setIsEnabled1(!isEnabled1)}
             style={{ marginHorizontal: "auto" }}
           />
 
@@ -46,8 +49,8 @@ export default function SwitchScreen() {
           </Text>
           <Switch
             variant="secondary"
-            value={isEnabled}
-            onValueChange={() => setIsEnabled(!isEnabled)}
+            value={isEnabled2}
+            onValueChange={() => setIsEnabled2(!isEnabled2)}
             style={{ marginHorizontal: "auto" }}
           />
 
@@ -58,8 +61,8 @@ export default function SwitchScreen() {
           </Text>
           <Switch
             variant="tertiary"
-            value={isEnabled}
-            onValueChange={() => setIsEnabled(!isEnabled)}
+            value={isEnabled3}
+            onValueChange={() => setIsEnabled3(!isEnabled3)}
             style={{ marginHorizontal: "auto" }}
           />
 
@@ -70,8 +73,8 @@ export default function SwitchScreen() {
           </Text>
           <Switch
             variant="success"
-            value={isEnabled}
-            onValueChange={() => setIsEnabled(!isEnabled)}
+            value={isEnabled4}
+            onValueChange={() => setIsEnabled4(!isEnabled4)}
             style={{ marginHorizontal: "auto" }}
           />
 
@@ -82,8 +85,20 @@ export default function SwitchScreen() {
           </Text>
           <Switch
             variant="error"
-            value={isEnabled}
-            onValueChange={() => setIsEnabled(!isEnabled)}
+            value={isEnabled5}
+            onValueChange={() => setIsEnabled5(!isEnabled5)}
+            style={{ marginHorizontal: "auto" }}
+          />
+
+          <Text
+            style={{ textAlign: "center", fontWeight: "500", fontSize: 14 }}
+          >
+            Disabled
+          </Text>
+          <Switch
+            disabled={true}
+            variant="error"
+            value={true}
             style={{ marginHorizontal: "auto" }}
           />
         </View>
