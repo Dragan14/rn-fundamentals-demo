@@ -35,14 +35,9 @@ type ButtonProps = {
   rightIconContainerStyle?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;
   round?: boolean;
-  variant?:
-    | "primary"
-    | "secondary"
-    | "tertiary"
-    | "outlined"
-    | "success"
-    | "error"
-    | "elevated";
+  outlined?: boolean;
+  elevated?: boolean;
+  variant?: "primary" | "secondary" | "tertiary" | "success" | "error";
 } & PressableProps;
 
 // Helper function to scale sizes based on font size
@@ -76,6 +71,8 @@ const Button = forwardRef(
       textStyle,
       disabled,
       round = false,
+      elevated = false,
+      outlined = false,
       variant,
       ...props
     }: ButtonProps,
@@ -88,23 +85,37 @@ const Button = forwardRef(
     const color = (() => {
       if (disabled) return theme.colors.backgroundDisabled;
       if (initialColor) return initialColor;
-      switch (variant) {
-        case "success":
-          return theme.colors.success;
-        case "error":
-          return theme.colors.error;
-        case "outlined":
-          return "transparent";
-        case "primary":
-          return theme.colors.primary;
-        case "secondary":
-          return theme.colors.secondary;
-        case "tertiary":
-          return theme.colors.tertiary;
-        case "elevated":
-          return theme.colors.elevated;
-        default:
-          return theme.colors.primary;
+      if (outlined && !elevated) return "transparent";
+      if (!elevated) {
+        switch (variant) {
+          case "success":
+            return theme.colors.success;
+          case "error":
+            return theme.colors.error;
+          case "primary":
+            return theme.colors.primary;
+          case "secondary":
+            return theme.colors.secondary;
+          case "tertiary":
+            return theme.colors.tertiary;
+          default:
+            return theme.colors.primary;
+        }
+      } else {
+        switch (variant) {
+          case "success":
+            return theme.colors.elevatedSuccess;
+          case "error":
+            return theme.colors.elevatedError;
+          case "primary":
+            return theme.colors.elevatedPrimary;
+          case "secondary":
+            return theme.colors.elevatedSecondary;
+          case "tertiary":
+            return theme.colors.elevatedTertiary;
+          default:
+            return theme.colors.elevatedPrimary;
+        }
       }
     })();
 
@@ -112,28 +123,55 @@ const Button = forwardRef(
     const textColor = (() => {
       if (disabled) return theme.colors.onBackgroundDisabled;
       if (initialTextColor) return initialTextColor;
+      if (outlined || elevated) {
+        switch (variant) {
+          case "success":
+            return theme.colors.success;
+          case "error":
+            return theme.colors.error;
+          case "primary":
+            return theme.colors.primary;
+          case "secondary":
+            return theme.colors.secondary;
+          case "tertiary":
+            return theme.colors.tertiary;
+          default:
+            return theme.colors.primary;
+        }
+      }
       switch (variant) {
         case "success":
           return theme.colors.onSuccess;
         case "error":
           return theme.colors.onError;
-        case "outlined":
-          return theme.colors.primary;
         case "primary":
           return theme.colors.onPrimary;
         case "secondary":
           return theme.colors.onSecondary;
         case "tertiary":
           return theme.colors.onTertiary;
-        case "elevated":
-          return theme.colors.primary;
         default:
           return theme.colors.onPrimary;
       }
     })();
 
     const borderRadius = round ? 20 : 5;
-    const borderColor = theme.colors.primary;
+    const borderColor = (() => {
+      switch (variant) {
+        case "success":
+          return theme.colors.success;
+        case "error":
+          return theme.colors.error;
+        case "primary":
+          return theme.colors.primary;
+        case "secondary":
+          return theme.colors.secondary;
+        case "tertiary":
+          return theme.colors.tertiary;
+        default:
+          return theme.colors.primary;
+      }
+    })();
 
     return (
       <Pressable
@@ -142,7 +180,7 @@ const Button = forwardRef(
           styles.button,
           { backgroundColor: color },
           { borderRadius: borderRadius },
-          variant === "outlined" && {
+          outlined && {
             borderWidth: 1,
             borderColor: borderColor,
           },

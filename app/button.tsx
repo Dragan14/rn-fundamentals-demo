@@ -30,8 +30,53 @@ export default function ButtonScreen() {
           <Button variant="tertiary">Tertiary</Button>
           <Button variant="error">Error</Button>
           <Button variant="success">Success</Button>
-          <Button variant="outlined">Outlined</Button>
-          <Button variant="elevated">Elevated</Button>
+        </View>
+        <View style={{ gap: 10, width: 350 }}>
+          <Text
+            style={{ textAlign: "center", fontWeight: "bold", fontSize: 18 }}
+          >
+            Outlined Variants
+          </Text>
+          <Button variant="primary" outlined={true}>
+            Primary
+          </Button>
+          <Button variant="secondary" outlined={true}>
+            Secondary
+          </Button>
+          <Button variant="tertiary" outlined={true}>
+            Tertiary
+          </Button>
+          <Button variant="error" outlined={true}>
+            Error
+          </Button>
+          <Button variant="success" outlined={true}>
+            Success
+          </Button>
+        </View>
+        <View style={{ gap: 10, width: 350 }}>
+          <Text
+            style={{ textAlign: "center", fontWeight: "bold", fontSize: 18 }}
+          >
+            Elevated Variants
+          </Text>
+          <Button variant="primary" elevated={true}>
+            Primary
+          </Button>
+          <Button variant="secondary" elevated={true}>
+            Secondary
+          </Button>
+          <Button variant="tertiary" elevated={true}>
+            Tertiary
+          </Button>
+          <Button variant="error" elevated={true}>
+            Error
+          </Button>
+          <Button variant="success" elevated={true}>
+            Success
+          </Button>
+          <Button variant="primary" elevated={true} outlined={true}>
+            Elevated and Outlined
+          </Button>
         </View>
         <View style={{ gap: 10, width: 350 }}>
           <Text
@@ -47,14 +92,14 @@ export default function ButtonScreen() {
             Left Icon
           </Button>
           <Button
-            variant="outlined"
+            outlined={true}
             rightIcon={<Camera />}
             style={{ maxWidth: 350 }}
           >
             Right Icon
           </Button>
           <Button
-            variant="elevated"
+            elevated={true}
             leftIcon={<PersonStanding />}
             rightIcon={<Camera />}
           >
@@ -73,7 +118,7 @@ export default function ButtonScreen() {
           <Button variant="tertiary" round={true}>
             Round
           </Button>
-          <Button variant="tertiary" loading={true}>
+          <Button variant="tertiary" loading={true} outlined={true}>
             Loading
           </Button>
         </View>
@@ -84,7 +129,7 @@ export default function ButtonScreen() {
             Customisation Example
           </Text>
           <Button
-            variant="elevated"
+            outlined={true}
             rightIcon={<Camera />}
             round={true}
             color="pink"
@@ -93,6 +138,7 @@ export default function ButtonScreen() {
               width: 50,
               height: 50,
               borderRadius: 50,
+              borderColor: "red",
               marginHorizontal: "auto",
             }}
             contentContainerStyle={{ padding: 0 }}
