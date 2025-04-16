@@ -85,16 +85,14 @@ export const SegmentedControl = ({
   const colors = {
     selectedContent: disabled
       ? theme.colors.onBackgroundDisabled
-      : theme.colors.onSecondaryContainer,
+      : theme.colors.primary,
     unselectedContent: disabled
       ? theme.colors.onBackgroundDisabled
       : theme.colors.onBackground,
-    border: disabled
-      ? theme.colors.onBackgroundDisabled
-      : theme.colors.secondary,
+    border: disabled ? theme.colors.onBackgroundDisabled : theme.colors.primary,
     activeTab: disabled
       ? theme.colors.backgroundDisabled
-      : theme.colors.secondaryContainer,
+      : theme.colors.elevatedPrimary,
   };
 
   return (
