@@ -68,6 +68,16 @@ export default function Home() {
               Segmented Control
             </Button>
           </Link>
+          <Link href="/switch" asChild>
+            <Button
+              style={{
+                width: 350,
+                marginHorizontal: "auto",
+              }}
+            >
+              Switch
+            </Button>
+          </Link>
         </View>
       </ScrollView>
     </SafeAreaView>
