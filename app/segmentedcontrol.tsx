@@ -1,4 +1,4 @@
-import { ScrollView, Text as RNText } from "react-native";
+import { ScrollView, Text as RNText, PixelRatio } from "react-native";
 import { useState } from "react";
 import SafeAreaView from "@/components/SafeAreaView";
 import View from "@/components/View";
@@ -126,6 +126,7 @@ export default function TextInputScreen() {
             onTabPress={(index) => {
               setSelectedindices5([index]);
             }}
+            style={{ minHeight: scaledSize(30) }}
           />
         </View>
         <View style={{ gap: 10, width: 350 }}>
@@ -151,11 +152,10 @@ export default function TextInputScreen() {
           </Text>
           <SegmentedControl
             values={[
-              <PlaneTakeoff size={40} color="black" />,
-              <PlaneLanding size={40} color="black" />,
+              <PlaneTakeoff size={30} color="black" />,
+              <PlaneLanding size={30} color="black" />,
             ]}
             selectedIndices={selectedindices7}
-            style={{ minHeight: 100 }}
             round={true}
             tabStyle={{ borderColor: "#FF474C" }}
             onTabPress={(index) => {
@@ -171,3 +171,7 @@ export default function TextInputScreen() {
     </SafeAreaView>
   );
 }
+
+const scaledSize = (baseSize: number) => {
+  return Math.round(baseSize * PixelRatio.getFontScale());
+};

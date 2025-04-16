@@ -5,6 +5,7 @@ import {
   cloneElement,
   isValidElement,
   ReactElement,
+  useState,
 } from "react";
 import {
   View,
@@ -15,6 +16,7 @@ import {
   StyleProp,
   TextStyle,
   PixelRatio,
+  LayoutChangeEvent,
 } from "react-native";
 import { useTheme } from "@/context/ThemeContext";
 
@@ -79,8 +81,14 @@ export const SegmentedControl = ({
   disabled = false,
 }: SegmentedControlProps) => {
   const { theme } = useTheme();
+  const [height, setHeight] = useState(0);
 
-  const borderRadius = round ? 20 : 5;
+  const borderRadius = round ? height / 2 : 5;
+
+  const onLayout = (event: LayoutChangeEvent) => {
+    const { height: componentHeight } = event.nativeEvent.layout;
+    setHeight(componentHeight);
+  };
 
   const colors = {
     selectedContent: disabled
@@ -99,14 +107,15 @@ export const SegmentedControl = ({
     <View style={[{ borderRadius: borderRadius }, styles.container, style]}>
       {values.map((valueElement, index) => {
         const isSelected = selectedIndices.includes(index);
+        const isFirstTab = index === 0;
         const isLastTab = index === values.length - 1;
         const currentTabBackgroundStyle = isSelected
           ? [{ backgroundColor: colors.activeTab }, activeTabStyle]
           : [styles.tabInactive, inactiveTabStyle];
         const tabBorderStyle = {
           borderRightWidth: isLastTab ? 1 : 0,
-          borderTopLeftRadius: index === 0 ? borderRadius : 0,
-          borderBottomLeftRadius: index === 0 ? borderRadius : 0,
+          borderTopLeftRadius: isFirstTab ? borderRadius : 0,
+          borderBottomLeftRadius: isFirstTab ? borderRadius : 0,
           borderTopRightRadius: isLastTab ? borderRadius : 0,
           borderBottomRightRadius: isLastTab ? borderRadius : 0,
         };

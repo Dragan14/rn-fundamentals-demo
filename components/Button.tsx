@@ -17,6 +17,7 @@ import {
   TextStyle,
   ActivityIndicator,
   PixelRatio,
+  LayoutChangeEvent,
 } from "react-native";
 import { useTheme } from "@/context/ThemeContext";
 
@@ -80,6 +81,12 @@ const Button = forwardRef(
   ) => {
     const { theme } = useTheme();
     const [isHovered, setIsHovered] = useState(false);
+    const [height, setHeight] = useState(0);
+
+    const onLayout = (event: LayoutChangeEvent) => {
+      const { height: componentHeight } = event.nativeEvent.layout;
+      setHeight(componentHeight);
+    };
 
     // Calculated background color
     const color = (() => {
@@ -155,7 +162,7 @@ const Button = forwardRef(
       }
     })();
 
-    const borderRadius = round ? 20 : 5;
+    const borderRadius = round ? height / 2 : 5;
     const borderColor = (() => {
       switch (variant) {
         case "success":
@@ -176,6 +183,7 @@ const Button = forwardRef(
     return (
       <Pressable
         ref={ref}
+        onLayout={onLayout}
         style={({ pressed }) => [
           styles.button,
           { backgroundColor: color },
