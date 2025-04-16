@@ -3,7 +3,7 @@ import SafeAreaView from "@/components/SafeAreaView";
 import View from "@/components/View";
 import Text from "@/components/Text";
 
-export default function TextInputScreen() {
+export default function TextScreen() {
   return (
     <SafeAreaView disableTopSafeArea={true}>
       <ScrollView

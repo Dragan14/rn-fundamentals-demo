@@ -4,8 +4,9 @@ import SafeAreaView from "@/components/SafeAreaView";
 import View from "@/components/View";
 import Text from "@/components/Text";
 import Switch from "@/components/Switch";
+import { Star } from "lucide-react-native";
 
-export default function TextInputScreen() {
+export default function SwitchScreen() {
   const [isEnabled, setIsEnabled] = useState(true);
   return (
     <SafeAreaView disableTopSafeArea={true}>

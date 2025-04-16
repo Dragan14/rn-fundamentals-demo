@@ -12,7 +12,7 @@ import {
   PlaneLanding,
 } from "lucide-react-native";
 
-export default function TextInputScreen() {
+export default function SegmentedControlScreen() {
   const [selectedindices1, setSelectedindices1] = useState<number[]>([0]);
   const [selectedindices2, setSelectedindices2] = useState<number[]>([0]);
   const [selectedindices3, setSelectedindices3] = useState<number[]>([0]);

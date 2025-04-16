@@ -4,22 +4,13 @@ import {
   SwitchProps as RNSwitchProps,
   Platform,
 } from "react-native";
-import { ReactNode } from "react";
 import { useTheme } from "@/context/ThemeContext";
 
 type SwitchProps = {
   variant?: "primary" | "secondary" | "tertiary" | "error" | "success";
-  onIcon?: ReactNode;
-  offIcon?: ReactNode;
 } & RNSwitchProps;
 
-const Switch = ({
-  variant,
-  onIcon,
-  offIcon,
-  disabled = false,
-  ...props
-}: SwitchProps) => {
+const Switch = ({ variant, disabled = false, ...props }: SwitchProps) => {
   const { theme } = useTheme();
 
   // Calculated background color
