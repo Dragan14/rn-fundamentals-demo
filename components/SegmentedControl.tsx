@@ -1,3 +1,4 @@
+// SegmentedControl.tsx
 import {
   Children,
   Fragment,

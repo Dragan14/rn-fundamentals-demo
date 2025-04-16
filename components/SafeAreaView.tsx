@@ -1,8 +1,9 @@
+// SafeAreaView.tsx
 /*
 Reimplemented SafeAreaView due to issues with react-native-safe-area-context
 https://github.com/AppAndFlow/react-native-safe-area-context/issues/114
 */
-import { ReactNode, FunctionComponent } from "react";
+import { ReactNode } from "react";
 import { View, ViewStyle, StyleSheet } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "@/context/ThemeContext";
@@ -27,29 +28,41 @@ const SafeAreaView = ({
 
   const insets = useSafeAreaInsets();
 
-  style = StyleSheet.flatten([
-    { flex: 1, backgroundColor: theme.colors.background },
-    style,
-  ]);
+  const backgroundColor = theme.colors.background;
+  const safeAreaStyle: ViewStyle = {};
 
   if (!disableBottomSafeArea) {
-    style.paddingBottom = insets.bottom;
+    safeAreaStyle.paddingBottom = insets.bottom;
   }
 
   if (!disableTopSafeArea) {
-    style.paddingTop = insets.top;
+    safeAreaStyle.paddingTop = insets.top;
   }
 
   if (!disableSidesSafeArea) {
-    style.paddingRight = insets.right;
-    style.paddingLeft = insets.left;
+    safeAreaStyle.paddingRight = insets.right;
+    safeAreaStyle.paddingLeft = insets.left;
   }
 
   return (
-    <View style={style} {...props}>
+    <View
+      style={[
+        styles.container,
+        { backgroundColor: backgroundColor },
+        safeAreaStyle,
+        style,
+      ]}
+      {...props}
+    >
       {children}
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
 
 export default SafeAreaView;

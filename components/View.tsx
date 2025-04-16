@@ -1,3 +1,4 @@
+// View.tsx
 import { View as RNView, ViewProps } from "react-native";
 import { useTheme } from "@/context/ThemeContext";
 
