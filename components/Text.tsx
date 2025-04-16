@@ -40,7 +40,7 @@ const Text = ({
   const [isHovered, setIsHovered] = useState(false);
 
   // Calculate color
-  let color = (() => {
+  const color = (() => {
     if (initialColor) return initialColor;
     switch (variant) {
       case "default":

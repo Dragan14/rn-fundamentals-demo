@@ -50,6 +50,14 @@ const scaledSize = (baseSize: number) => {
   return Math.round(baseSize * PixelRatio.getFontScale());
 };
 
+// Helper function to render icons
+const renderIcon = (icon: ReactElement, color: string) => {
+  return cloneElement(icon, {
+    color: icon.props.color ?? color,
+    size: (icon.props.size && scaledSize(icon.props.size)) ?? scaledSize(24),
+  });
+};
+
 // Button component
 const Button = forwardRef(
   (
@@ -77,7 +85,7 @@ const Button = forwardRef(
     const [isHovered, setIsHovered] = useState(false);
 
     // Calculated background color
-    let color = (() => {
+    const color = (() => {
       if (disabled) return theme.colors.backgroundDisabled;
       if (initialColor) return initialColor;
       switch (variant) {
@@ -101,7 +109,7 @@ const Button = forwardRef(
     })();
 
     // Calculated text color
-    let textColor = (() => {
+    const textColor = (() => {
       if (disabled) return theme.colors.onBackgroundDisabled;
       if (initialTextColor) return initialTextColor;
       switch (variant) {
@@ -125,15 +133,7 @@ const Button = forwardRef(
     })();
 
     const borderRadius = round ? 20 : 5;
-
-    // Helper function to render icons
-    const renderIcon = (icon: ReactElement) => {
-      return cloneElement(icon, {
-        color: icon.props.color ?? textColor,
-        size:
-          (icon.props.size && scaledSize(icon.props.size)) ?? scaledSize(24),
-      });
-    };
+    const borderColor = theme.colors.primary;
 
     return (
       <Pressable
@@ -144,7 +144,7 @@ const Button = forwardRef(
           { borderRadius: borderRadius },
           variant === "outlined" && {
             borderWidth: 1,
-            borderColor: theme.colors.primary,
+            borderColor: borderColor,
           },
           !disabled && isHovered && styles.hovered,
           !disabled && pressed && styles.pressed,
@@ -168,7 +168,7 @@ const Button = forwardRef(
             <>
               {leftIcon && (
                 <View style={leftIconContainerStyle} pointerEvents="none">
-                  {renderIcon(leftIcon)}
+                  {renderIcon(leftIcon, textColor)}
                 </View>
               )}
               {children && (
@@ -186,7 +186,7 @@ const Button = forwardRef(
               )}
               {rightIcon && (
                 <View style={rightIconContainerStyle} pointerEvents="none">
-                  {renderIcon(rightIcon)}
+                  {renderIcon(rightIcon, textColor)}
                 </View>
               )}
             </>

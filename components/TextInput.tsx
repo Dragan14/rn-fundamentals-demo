@@ -49,6 +49,14 @@ const scaledSize = (baseSize: number) => {
   return Math.round(baseSize * PixelRatio.getFontScale());
 };
 
+// Helper function to render icons
+const renderIcon = (icon: ReactElement, color: string) => {
+  return cloneElement(icon, {
+    color: icon.props.color ?? color,
+    size: (icon.props.size && scaledSize(icon.props.size)) ?? scaledSize(24),
+  });
+};
+
 // TextInput component
 const TextInput = ({
   topLabel,
@@ -148,14 +156,6 @@ const TextInput = ({
         : 6,
   };
 
-  // Helper function to render icons
-  const renderIcon = (icon: ReactElement) => {
-    return cloneElement(icon, {
-      color: icon.props.color ?? colors.text,
-      size: (icon.props.size && scaledSize(icon.props.size)) ?? scaledSize(24),
-    });
-  };
-
   return (
     <View style={style}>
       <Pressable
@@ -206,7 +206,7 @@ const TextInput = ({
               ]}
               onLayout={handleLeftIconLayout}
             >
-              {renderIcon(leftIcon)}
+              {renderIcon(leftIcon, colors.text)}
             </View>
           )}
           {hasLeftLabel && (
@@ -255,7 +255,7 @@ const TextInput = ({
                 rightIconStyle,
               ]}
             >
-              {renderIcon(rightIcon)}
+              {renderIcon(rightIcon, colors.text)}
             </View>
           )}
         </View>

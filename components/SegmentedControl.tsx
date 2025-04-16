@@ -1,4 +1,10 @@
-import { Children, Fragment, cloneElement, isValidElement } from "react";
+import {
+  Children,
+  Fragment,
+  cloneElement,
+  isValidElement,
+  ReactElement,
+} from "react";
 import {
   View,
   Pressable,
@@ -11,13 +17,26 @@ import {
 } from "react-native";
 import { useTheme } from "@/context/ThemeContext";
 
-const renderElementWithColor = (
-  element: React.ReactElement,
-  color: string,
-): React.ReactElement => {
+interface SegmentedControlProps {
+  values: ReactElement[];
+  selectedIndices: number[];
+  onTabPress: (index: number) => void;
+  style?: StyleProp<ViewStyle>;
+  tabStyle?: StyleProp<ViewStyle>;
+  activeTabStyle?: StyleProp<ViewStyle>;
+  inactiveTabStyle?: StyleProp<ViewStyle>;
+  round?: boolean;
+  disabled?: boolean;
+}
+
+const scaledSize = (baseSize: number) => {
+  return Math.round(baseSize * PixelRatio.getFontScale());
+};
+
+const renderElement = (element: ReactElement, color: string): ReactElement => {
   if (element.type === Fragment) {
     const children = Children.map(element.props.children, (child) =>
-      isValidElement(child) ? renderElementWithColor(child, color) : child,
+      isValidElement(child) ? renderElement(child, color) : child,
     );
     return (
       <View
@@ -47,18 +66,6 @@ const renderElementWithColor = (
   }
 };
 
-interface SegmentedControlProps {
-  values: React.ReactElement[];
-  selectedIndices: number[];
-  onTabPress: (index: number) => void;
-  style?: StyleProp<ViewStyle>;
-  tabStyle?: StyleProp<ViewStyle>;
-  activeTabStyle?: StyleProp<ViewStyle>;
-  inactiveTabStyle?: StyleProp<ViewStyle>;
-  round?: boolean;
-  disabled?: boolean;
-}
-
 export const SegmentedControl = ({
   values,
   selectedIndices,
@@ -72,43 +79,31 @@ export const SegmentedControl = ({
 }: SegmentedControlProps) => {
   const { theme } = useTheme();
 
-  const borderRadius =
-    StyleSheet.flatten(style)?.borderRadius ?? (round ? 20 : 5);
+  const borderRadius = round ? 20 : 5;
 
-  const styles = StyleSheet.create({
-    container: {
-      flexDirection: "row",
-      borderRadius: borderRadius,
-      backgroundColor: theme.colors.background,
-      opacity: disabled ? 0.5 : 1,
-    },
-    tabBase: {
-      flex: 1,
-      padding: 5,
-      justifyContent: "center",
-      alignItems: "center",
-      borderWidth: 1,
-      borderColor: theme.colors.secondary,
-      borderRightWidth: 0,
-    },
-    tabInactive: {
-      backgroundColor: theme.colors.background,
-    },
-    tabActive: {
-      backgroundColor: theme.colors.secondaryContainer,
-    },
-  });
+  const colors = {
+    selectedContent: disabled
+      ? theme.colors.onBackgroundDisabled
+      : theme.colors.onSecondaryContainer,
+    unselectedContent: disabled
+      ? theme.colors.onBackgroundDisabled
+      : theme.colors.onBackground,
+    border: disabled
+      ? theme.colors.onBackgroundDisabled
+      : theme.colors.secondary,
+    activeTab: disabled
+      ? theme.colors.backgroundDisabled
+      : theme.colors.secondaryContainer,
+  };
 
   return (
-    <View style={[styles.container, style]}>
+    <View style={[{ borderRadius: borderRadius }, styles.container, style]}>
       {values.map((valueElement, index) => {
         const isSelected = selectedIndices.includes(index);
         const isLastTab = index === values.length - 1;
-
         const currentTabBackgroundStyle = isSelected
-          ? [styles.tabActive, activeTabStyle]
+          ? [{ backgroundColor: colors.activeTab }, activeTabStyle]
           : [styles.tabInactive, inactiveTabStyle];
-
         const tabBorderStyle = {
           borderRightWidth: isLastTab ? 1 : 0,
           borderTopLeftRadius: index === 0 ? borderRadius : 0,
@@ -116,21 +111,16 @@ export const SegmentedControl = ({
           borderTopRightRadius: isLastTab ? borderRadius : 0,
           borderBottomRightRadius: isLastTab ? borderRadius : 0,
         };
-
         const contentColor = isSelected
-          ? theme.colors.onSecondaryContainer
-          : theme.colors.onBackground;
-
-        const renderedContent = renderElementWithColor(
-          valueElement,
-          contentColor,
-        );
-
+          ? colors.selectedContent
+          : colors.unselectedContent;
+        const renderedContent = renderElement(valueElement, contentColor);
         return (
           <Pressable
             key={index}
             onPress={() => onTabPress(index)}
             style={[
+              { borderColor: colors.border },
               styles.tabBase,
               tabStyle,
               tabBorderStyle,
@@ -146,6 +136,20 @@ export const SegmentedControl = ({
   );
 };
 
-const scaledSize = (baseSize: number) => {
-  return Math.round(baseSize * PixelRatio.getFontScale());
-};
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: "row",
+    backgroundColor: "transparent",
+  },
+  tabBase: {
+    flex: 1,
+    padding: 5,
+    justifyContent: "center",
+    alignItems: "center",
+    borderWidth: 1,
+    borderRightWidth: 0,
+  },
+  tabInactive: {
+    backgroundColor: "transparent",
+  },
+});
