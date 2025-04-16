@@ -180,6 +180,7 @@ export default function TextInputScreen() {
             variant="outlined"
             disabled={!isEditing}
             retainErrorMessageSpace={false}
+            topLabel="Top Label"
             leftIcon={
               !isEditing ? (
                 <Pencil

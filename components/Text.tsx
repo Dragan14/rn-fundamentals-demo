@@ -1,4 +1,5 @@
-import { useState } from "react";
+// Text.tsx
+import { useState, ReactNode } from "react";
 import {
   Text as RNText,
   TextProps as RNTextProps,
@@ -8,8 +9,9 @@ import {
 } from "react-native";
 import { useTheme } from "@/context/ThemeContext";
 
+// Text props type
 type TextProps = {
-  children: React.ReactNode;
+  children: ReactNode;
   style?: StyleProp<TextStyle>;
   variant?:
     | "default"
@@ -23,11 +25,12 @@ type TextProps = {
   disabled?: boolean;
 } & RNTextProps;
 
+// Text component
 const Text = ({
   children,
   style,
   variant,
-  color,
+  color: initialColor,
   link,
   disabled,
   onPress,
@@ -36,8 +39,9 @@ const Text = ({
   const { theme } = useTheme();
   const [isHovered, setIsHovered] = useState(false);
 
-  color = (() => {
-    if (color) return color;
+  // Calculate color
+  let color = (() => {
+    if (initialColor) return initialColor;
     switch (variant) {
       case "default":
         return theme.colors.onBackground;
@@ -68,7 +72,9 @@ const Text = ({
           disabled={disabled}
           style={[
             { color: color },
-            pressed || isHovered ? { textDecorationLine: "underline" } : {},
+            !disabled && (pressed || isHovered)
+              ? { textDecorationLine: "underline" }
+              : {},
             style,
           ]}
           {...props}
@@ -78,7 +84,7 @@ const Text = ({
       )}
     </Pressable>
   ) : (
-    <RNText style={[{ color: color }, style]} {...props}>
+    <RNText disabled={disabled} style={[{ color: color }, style]} {...props}>
       {children}
     </RNText>
   );

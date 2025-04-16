@@ -1,4 +1,11 @@
-import { useState, cloneElement, forwardRef, ForwardedRef } from "react";
+// Button.tsx
+import {
+  useState,
+  cloneElement,
+  forwardRef,
+  ForwardedRef,
+  ReactElement,
+} from "react";
 import {
   Pressable,
   PressableProps,
@@ -13,12 +20,13 @@ import {
 } from "react-native";
 import { useTheme } from "@/context/ThemeContext";
 
+// Button props type
 type ButtonProps = {
   children?: string;
   color?: string;
   textColor?: string;
-  leftIcon?: React.ReactElement;
-  rightIcon?: React.ReactElement;
+  leftIcon?: ReactElement;
+  rightIcon?: ReactElement;
   loading?: boolean;
   style?: StyleProp<ViewStyle>;
   textContainerStyle?: StyleProp<ViewStyle>;
@@ -37,12 +45,18 @@ type ButtonProps = {
     | "elevated";
 } & PressableProps;
 
+// Helper function to scale sizes based on font size
+const scaledSize = (baseSize: number) => {
+  return Math.round(baseSize * PixelRatio.getFontScale());
+};
+
+// Button component
 const Button = forwardRef(
   (
     {
       children,
-      color,
-      textColor,
+      color: initialColor,
+      textColor: initialTextColor,
       leftIcon,
       rightIcon,
       loading = false,
@@ -62,9 +76,10 @@ const Button = forwardRef(
     const { theme } = useTheme();
     const [isHovered, setIsHovered] = useState(false);
 
-    color = (() => {
+    // Calculated background color
+    let color = (() => {
       if (disabled) return theme.colors.backgroundDisabled;
-      if (color) return color;
+      if (initialColor) return initialColor;
       switch (variant) {
         case "success":
           return theme.colors.success;
@@ -85,9 +100,10 @@ const Button = forwardRef(
       }
     })();
 
-    textColor = (() => {
+    // Calculated text color
+    let textColor = (() => {
       if (disabled) return theme.colors.onBackgroundDisabled;
-      if (textColor) return textColor;
+      if (initialTextColor) return initialTextColor;
       switch (variant) {
         case "success":
           return theme.colors.onSuccess;
@@ -110,7 +126,8 @@ const Button = forwardRef(
 
     const borderRadius = round ? 20 : 5;
 
-    const renderIcon = (icon: React.ReactElement) => {
+    // Helper function to render icons
+    const renderIcon = (icon: ReactElement) => {
       return cloneElement(icon, {
         color: icon.props.color ?? textColor,
         size:
@@ -183,10 +200,6 @@ const Button = forwardRef(
 Button.displayName = "Button";
 
 export default Button;
-
-const scaledSize = (baseSize: number) => {
-  return Math.round(baseSize * PixelRatio.getFontScale());
-};
 
 const styles = StyleSheet.create({
   button: {

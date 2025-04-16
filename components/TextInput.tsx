@@ -1,4 +1,11 @@
-import { useRef, useState, useCallback, cloneElement } from "react";
+// TextInput.tsx
+import {
+  useRef,
+  useState,
+  useCallback,
+  cloneElement,
+  ReactElement,
+} from "react";
 import {
   View,
   ViewStyle,
@@ -15,11 +22,12 @@ import {
 } from "react-native";
 import { useTheme } from "@/context/ThemeContext";
 
+// TextInput props type
 type TextInputProps = {
   topLabel?: string;
   leftLabel?: string;
-  leftIcon?: React.ReactElement;
-  rightIcon?: React.ReactElement;
+  leftIcon?: ReactElement;
+  rightIcon?: ReactElement;
   error?: boolean;
   errorMessage?: string;
   retainErrorMessageSpace?: boolean;
@@ -36,6 +44,12 @@ type TextInputProps = {
   disabled?: boolean;
 } & RNTextInputProps;
 
+// Helper function to scale sizes based on font size
+const scaledSize = (baseSize: number) => {
+  return Math.round(baseSize * PixelRatio.getFontScale());
+};
+
+// TextInput component
 const TextInput = ({
   topLabel,
   leftLabel,
@@ -69,6 +83,24 @@ const TextInput = ({
     setLeftIconContainerWidth(event.nativeEvent.layout.width);
   }, []);
 
+  const handleFocus = useCallback(
+    (e: any) => {
+      if (!disabled) {
+        setIsFocused(true);
+        onFocus?.(e);
+      }
+    },
+    [disabled, onFocus],
+  );
+
+  const handleBlur = useCallback(
+    (e: any) => {
+      setIsFocused(false);
+      onBlur?.(e);
+    },
+    [onBlur],
+  );
+
   const colors = {
     border: disabled
       ? theme.colors.onBackgroundDisabled
@@ -80,7 +112,7 @@ const TextInput = ({
             ? theme.colors.onBackgroundVariant
             : theme.colors.onBackground,
     text: disabled
-      ? theme.colors.backgroundDisabled
+      ? theme.colors.onBackgroundDisabled
       : variant === "solid"
         ? theme.colors.onBackgroundVariant
         : theme.colors.onBackground,
@@ -90,10 +122,21 @@ const TextInput = ({
           ? theme.colors.backgroundDisabled
           : theme.colors.backgroundVariant
         : "transparent",
-    topLabel: variant === "solid" ? "transparent" : theme.colors.background,
+    topLabel:
+      variant === "solid" || variant === "clear"
+        ? "transparent"
+        : theme.colors.background,
+    placeholder: theme.colors.onBackgroundDisabled,
+    error: theme.colors.error,
+    counter: disabled
+      ? theme.colors.onBackgroundDisabled
+      : theme.colors.onBackground,
   };
 
   const isOutlined = variant === "outlined";
+  const hasTopLabel = !!topLabel;
+  const hasLeftLabel = !!leftLabel;
+
   const layout = {
     containerPadding: isOutlined || !topLabel ? 0 : scaledSize(15),
     iconMargin: isOutlined || !topLabel ? 0 : scaledSize(-14),
@@ -105,7 +148,8 @@ const TextInput = ({
         : 6,
   };
 
-  const renderIcon = (icon: React.ReactElement) => {
+  // Helper function to render icons
+  const renderIcon = (icon: ReactElement) => {
     return cloneElement(icon, {
       color: icon.props.color ?? colors.text,
       size: (icon.props.size && scaledSize(icon.props.size)) ?? scaledSize(24),
@@ -122,7 +166,7 @@ const TextInput = ({
         }}
         disabled={disabled}
       >
-        {topLabel && (
+        {hasTopLabel && (
           <Text
             style={[
               styles.topLabel,
@@ -165,7 +209,7 @@ const TextInput = ({
               {renderIcon(leftIcon)}
             </View>
           )}
-          {leftLabel && (
+          {hasLeftLabel && (
             <Text
               style={[
                 styles.leftLabel,
@@ -185,21 +229,15 @@ const TextInput = ({
           <View
             style={[
               styles.textInputContainer,
-              !leftLabel && { paddingTop: layout.containerPadding },
+              !hasLeftLabel && { paddingTop: layout.containerPadding },
             ]}
           >
             <RNTextInput
               ref={inputRef}
               style={[styles.textInput, { color: colors.text }, textStyle]}
-              placeholderTextColor={theme.colors.onBackgroundDisabled}
-              onBlur={(e) => {
-                setIsFocused(false);
-                onBlur?.(e);
-              }}
-              onFocus={(e) => {
-                setIsFocused(true);
-                onFocus?.(e);
-              }}
+              placeholderTextColor={colors.placeholder}
+              onBlur={handleBlur}
+              onFocus={handleFocus}
               editable={!disabled}
               maxLength={maxLength}
               value={value}
@@ -224,31 +262,17 @@ const TextInput = ({
       </Pressable>
       {((error && errorMessage && !disabled) ||
         (counter && !disabled) ||
-        retainErrorMessageSpace) && (
+        (retainErrorMessageSpace && (!error || !errorMessage))) && (
         <View style={styles.bottomContainer}>
-          {error && errorMessage ? (
-            <Text
-              style={[
-                styles.errorMessage,
-                {
-                  color: theme.colors.error,
-                },
-              ]}
-            >
+          {error && errorMessage && !disabled ? (
+            <Text style={[styles.errorMessage, { color: colors.error }]}>
               {errorMessage}
             </Text>
           ) : (
             <View style={{ flex: 1 }} />
           )}
           {counter && !disabled && (
-            <Text
-              style={[
-                styles.counter,
-                {
-                  color: colors.text,
-                },
-              ]}
-            >
+            <Text style={[styles.counter, { color: colors.counter }]}>
               {maxLength
                 ? `${value?.length ?? 0}/${maxLength}`
                 : `${value?.length ?? 0}`}
@@ -260,11 +284,9 @@ const TextInput = ({
   );
 };
 
-export default TextInput;
+TextInput.displayName = "TextInput";
 
-const scaledSize = (baseSize: number) => {
-  return Math.round(baseSize * PixelRatio.getFontScale());
-};
+export default TextInput;
 
 const styles = StyleSheet.create({
   container: {
