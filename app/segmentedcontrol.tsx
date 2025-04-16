@@ -120,7 +120,7 @@ export default function TextInputScreen() {
             Round
           </Text>
           <SegmentedControl
-            round={true}
+            rounded={true}
             values={[<RNText>Tab One</RNText>, <RNText>Tab Two</RNText>]}
             selectedIndices={selectedindices5}
             onTabPress={(index) => {
@@ -156,7 +156,7 @@ export default function TextInputScreen() {
               <PlaneLanding size={30} color="black" />,
             ]}
             selectedIndices={selectedindices7}
-            round={true}
+            rounded={true}
             tabStyle={{ borderColor: "#FF474C" }}
             onTabPress={(index) => {
               setSelectedindices7([index]);

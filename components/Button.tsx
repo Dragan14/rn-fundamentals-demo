@@ -35,7 +35,7 @@ type ButtonProps = {
   leftIconContainerStyle?: StyleProp<ViewStyle>;
   rightIconContainerStyle?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;
-  round?: boolean;
+  rounded?: boolean;
   outlined?: boolean;
   elevated?: boolean;
   variant?: "primary" | "secondary" | "tertiary" | "success" | "error";
@@ -71,7 +71,7 @@ const Button = forwardRef(
       rightIconContainerStyle,
       textStyle,
       disabled,
-      round = false,
+      rounded = false,
       elevated = false,
       outlined = false,
       variant,
@@ -162,7 +162,7 @@ const Button = forwardRef(
       }
     })();
 
-    const borderRadius = round ? height / 2 : 5;
+    const borderRadius = rounded ? height / 2 : 5;
     const borderColor = (() => {
       switch (variant) {
         case "success":

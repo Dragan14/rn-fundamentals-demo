@@ -28,7 +28,7 @@ interface SegmentedControlProps {
   tabStyle?: StyleProp<ViewStyle>;
   activeTabStyle?: StyleProp<ViewStyle>;
   inactiveTabStyle?: StyleProp<ViewStyle>;
-  round?: boolean;
+  rounded?: boolean;
   disabled?: boolean;
 }
 
@@ -77,13 +77,13 @@ export const SegmentedControl = ({
   tabStyle,
   activeTabStyle,
   inactiveTabStyle,
-  round = false,
+  rounded = false,
   disabled = false,
 }: SegmentedControlProps) => {
   const { theme } = useTheme();
   const [height, setHeight] = useState(0);
 
-  const borderRadius = round ? height / 2 : 5;
+  const borderRadius = rounded ? height / 2 : 5;
 
   const onLayout = (event: LayoutChangeEvent) => {
     const { height: componentHeight } = event.nativeEvent.layout;
@@ -104,7 +104,10 @@ export const SegmentedControl = ({
   };
 
   return (
-    <View style={[{ borderRadius: borderRadius }, styles.container, style]}>
+    <View
+      style={[{ borderRadius: borderRadius }, styles.container, style]}
+      onLayout={onLayout}
+    >
       {values.map((valueElement, index) => {
         const isSelected = selectedIndices.includes(index);
         const isFirstTab = index === 0;

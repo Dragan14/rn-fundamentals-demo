@@ -115,7 +115,7 @@ export default function ButtonScreen() {
           <Button style={{ maxWidth: 350 }} disabled={true}>
             Disabled
           </Button>
-          <Button variant="tertiary" round={true}>
+          <Button variant="tertiary" rounded={true}>
             Round
           </Button>
           <Button variant="tertiary" loading={true} outlined={true}>
@@ -131,7 +131,7 @@ export default function ButtonScreen() {
           <Button
             outlined={true}
             rightIcon={<Camera />}
-            round={true}
+            rounded={true}
             color="pink"
             textColor="red"
             style={{
