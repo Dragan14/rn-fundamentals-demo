@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "rn-fundamentals",
-    "slug": "rn-fundamentals",
-    "scheme": "rn-fundamentals",
+    "name": "rn-fundamentals-demo",
+    "slug": "rn-fundamentals-demo",
+    "scheme": "rn-fundamentals-demo",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -15,14 +15,14 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.dragan14.rnfundamentals"
+      "bundleIdentifier": "com.dragan14.rnfundamentalsdemo"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.dragan14.rnfundamentals"
+      "package": "com.dragan14.rnfundamentalsdemo"
     },
     "web": {
       "favicon": "./assets/favicon.png",
