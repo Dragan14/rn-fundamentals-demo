@@ -122,7 +122,7 @@ export default function ButtonScreen() {
             Loading
           </Button>
         </View>
-        <View style={{ gap: 10, width: 350 }}>
+        <View style={{ gap: 10, width: 350, marginBottom: 5 }}>
           <Text
             style={{ textAlign: "center", fontWeight: "bold", fontSize: 18 }}
           >

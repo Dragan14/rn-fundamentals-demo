@@ -78,6 +78,16 @@ export default function Home() {
               Switch
             </Button>
           </Link>
+          <Link href="/toast" asChild>
+            <Button
+              style={{
+                width: 350,
+                marginHorizontal: "auto",
+              }}
+            >
+              Toast
+            </Button>
+          </Link>
         </View>
       </ScrollView>
     </SafeAreaView>
