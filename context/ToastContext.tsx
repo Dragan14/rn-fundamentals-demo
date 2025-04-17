@@ -7,11 +7,14 @@ import React, {
   useEffect,
 } from "react";
 
+type ToastPosition = "top" | "bottom";
+
 interface ToastOptions {
   message: string;
   duration?: number;
   leftIcon?: ReactElement;
   rightIcon?: ReactElement;
+  position?: ToastPosition;
 }
 
 interface ToastContextType {
@@ -21,6 +24,7 @@ interface ToastContextType {
   message: string;
   leftIcon?: ReactElement;
   rightIcon?: ReactElement;
+  position: ToastPosition;
 }
 
 const ToastContext = createContext<ToastContextType | undefined>(undefined);
@@ -33,13 +37,13 @@ export const ToastProvider = ({ children }: { children: ReactNode }) => {
     undefined,
   );
   const [duration, setDuration] = useState(3000);
+  const [position, setPosition] = useState<ToastPosition>("bottom");
 
   useEffect(() => {
     if (isVisible) {
-      const timer = setTimeout(() => {
+      setTimeout(() => {
         hideToast();
       }, duration);
-      return () => clearTimeout(timer);
     }
   }, [isVisible, duration]);
 
@@ -48,21 +52,22 @@ export const ToastProvider = ({ children }: { children: ReactNode }) => {
     duration = 3000,
     leftIcon,
     rightIcon,
+    position = "bottom",
   }: ToastOptions) => {
     setMessage(message);
     setDuration(duration);
     setLeftIcon(leftIcon);
     setRightIcon(rightIcon);
+    setPosition(position);
     setIsVisible(true);
   };
 
   const hideToast = () => {
     setIsVisible(false);
-    setTimeout(() => {
-      setMessage("");
-      setLeftIcon(undefined);
-      setRightIcon(undefined);
-    }, 500);
+    setMessage("");
+    setLeftIcon(undefined);
+    setRightIcon(undefined);
+    setPosition("bottom");
   };
 
   return (
@@ -74,6 +79,7 @@ export const ToastProvider = ({ children }: { children: ReactNode }) => {
         message,
         leftIcon,
         rightIcon,
+        position,
       }}
     >
       {children}

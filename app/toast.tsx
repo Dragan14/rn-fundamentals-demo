@@ -10,11 +10,21 @@ import { XCircle } from "lucide-react-native"; // Import icons
 export default function ToastScreen() {
   const { showToast } = useToast();
 
-  const handleShowToast = () => {
+  const handleShowToastBottom = () => {
     showToast({
-      message: "This is a toast message!",
+      message: "This is a bottom toast!",
       leftIcon: <CheckCircle />,
       rightIcon: <XCircle />,
+      position: "bottom",
+    });
+  };
+
+  const handleShowToastTop = () => {
+    showToast({
+      message: "This is a top toast!",
+      leftIcon: <CheckCircle />,
+      rightIcon: <XCircle />,
+      position: "top",
     });
   };
 
@@ -34,9 +44,10 @@ export default function ToastScreen() {
           <Text
             style={{ textAlign: "center", fontWeight: "bold", fontSize: 18 }}
           >
-            Click on the button to show the Toast
+            Top and Bottom Toast
           </Text>
-          <Button onPress={handleShowToast}>Show Toast</Button>
+          <Button onPress={handleShowToastBottom}>Show Bottom Toast</Button>
+          <Button onPress={handleShowToastTop}>Show Top Toast</Button>
         </View>
       </ScrollView>
     </SafeAreaView>
