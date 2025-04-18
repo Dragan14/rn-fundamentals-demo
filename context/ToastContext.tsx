@@ -6,6 +6,7 @@ import React, {
   ReactElement,
   useEffect,
 } from "react";
+import { StyleProp, ViewStyle, TextStyle } from "react-native";
 
 type ToastPosition = "top" | "bottom";
 
@@ -15,6 +16,12 @@ interface ToastOptions {
   leftIcon?: ReactElement;
   rightIcon?: ReactElement;
   position?: ToastPosition;
+  containerStyle?: StyleProp<ViewStyle>;
+  contentContainerStyle?: StyleProp<ViewStyle>;
+  leftIconContainerStyle?: StyleProp<ViewStyle>;
+  textContainerStyle?: StyleProp<ViewStyle>;
+  textStyle?: StyleProp<TextStyle>;
+  rightIconContainerStyle?: StyleProp<ViewStyle>;
 }
 
 interface ToastContextType {
@@ -25,6 +32,12 @@ interface ToastContextType {
   leftIcon?: ReactElement;
   rightIcon?: ReactElement;
   position: ToastPosition;
+  containerStyle?: StyleProp<ViewStyle>;
+  contentContainerStyle?: StyleProp<ViewStyle>;
+  leftIconContainerStyle?: StyleProp<ViewStyle>;
+  textContainerStyle?: StyleProp<ViewStyle>;
+  textStyle?: StyleProp<TextStyle>;
+  rightIconContainerStyle?: StyleProp<ViewStyle>;
 }
 
 const ToastContext = createContext<ToastContextType | undefined>(undefined);

@@ -5,6 +5,7 @@ import {
   PixelRatio,
   StyleSheet,
   Platform,
+  View,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "@/context/ThemeContext";
@@ -30,8 +31,24 @@ const renderIcon = (icon: ReactElement, color: string) => {
 const Toast = () => {
   const { theme } = useTheme();
   const insets = useSafeAreaInsets();
-  const { isVisible, message, leftIcon, rightIcon, hideToast, position } =
-    useToast();
+  const {
+    isVisible,
+    message,
+    leftIcon,
+    rightIcon,
+    hideToast,
+    position,
+    containerStyle,
+    contentContainerStyle,
+    leftIconContainerStyle,
+    textContainerStyle,
+    textStyle,
+    rightIconContainerStyle,
+  } = useToast();
+
+  if (!isVisible) {
+    return null;
+  }
 
   const offset = Platform.OS === "web" ? 20 : 0;
   const basePositionStyle =
@@ -39,12 +56,10 @@ const Toast = () => {
       ? { top: insets.top + offset }
       : { bottom: insets.bottom + offset };
 
-  if (!isVisible) {
-    return null;
-  }
-
-  const enteringAnimation = position === "top" ? SlideInUp : SlideInDown;
-  const exitingAnimation = position === "top" ? SlideOutUp : SlideOutDown;
+  const enteringAnimation =
+    position === "top" ? SlideInUp.duration(500) : SlideInDown.duration(500);
+  const exitingAnimation =
+    position === "top" ? SlideOutUp.duration(500) : SlideOutDown.duration(500);
 
   return (
     <Animated.View
@@ -57,16 +72,38 @@ const Toast = () => {
           shadowColor: "rgb(0,0,0)",
         },
         basePositionStyle,
+        containerStyle,
       ]}
     >
-      <Pressable style={styles.pressableContent} onPress={hideToast}>
-        {leftIcon && renderIcon(leftIcon, theme.colors.onPrimary)}
-        {message != null && (
-          <Text style={[styles.text, { color: theme.colors.onPrimary }]}>
-            {message}
-          </Text>
-        )}
-        {rightIcon && renderIcon(rightIcon, theme.colors.onPrimary)}
+      <Pressable
+        style={[styles.pressableContent, contentContainerStyle]}
+        onPress={hideToast}
+      >
+        <View style={leftIconContainerStyle}>
+          {leftIcon && renderIcon(leftIcon, theme.colors.onPrimary)}
+        </View>
+        <View
+          style={[
+            styles.textContainer,
+            textContainerStyle,
+            !leftIcon && !rightIcon && { flex: 1 },
+          ]}
+        >
+          {message != null && (
+            <Text
+              style={[
+                styles.text,
+                { color: theme.colors.onPrimary },
+                textStyle,
+              ]}
+            >
+              {message}
+            </Text>
+          )}
+        </View>
+        <View style={rightIconContainerStyle}>
+          {rightIcon && renderIcon(rightIcon, theme.colors.onPrimary)}
+        </View>
       </Pressable>
     </Animated.View>
   );
@@ -89,7 +126,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     width: "100%",
   },
+  textContainer: {
+    alignItems: "center",
+    marginHorizontal: 4,
+  },
   text: {
+    fontWeight: "500",
+    textAlign: "center",
     marginHorizontal: 5,
   },
 });
