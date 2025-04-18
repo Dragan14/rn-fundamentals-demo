@@ -110,7 +110,6 @@ export default function TextInputScreen() {
             placeholder="clear"
             variant="clear"
             leftLabel="Left Label"
-            topLabel="Top Label"
             leftIcon={<CircleUser />}
             rightIcon={<CircleCheckBig />}
             retainErrorMessageSpace={false}

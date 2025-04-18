@@ -213,7 +213,7 @@ const Button = forwardRef(
           ) : (
             <>
               {leftIcon && (
-                <View style={leftIconContainerStyle} pointerEvents="none">
+                <View style={leftIconContainerStyle}>
                   {renderIcon(leftIcon, textColor)}
                 </View>
               )}
@@ -231,7 +231,7 @@ const Button = forwardRef(
                 </View>
               )}
               {rightIcon && (
-                <View style={rightIconContainerStyle} pointerEvents="none">
+                <View style={rightIconContainerStyle}>
                   {renderIcon(rightIcon, textColor)}
                 </View>
               )}

@@ -1,4 +1,5 @@
-import { ReactElement, cloneElement } from "react";
+// Toast.tsx
+import { useState, ReactElement, cloneElement } from "react";
 import {
   Text,
   Pressable,
@@ -6,16 +7,39 @@ import {
   StyleSheet,
   Platform,
   View,
+  LayoutChangeEvent,
+  StyleProp,
+  ViewStyle,
+  TextStyle,
+  PressableProps,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "@/context/ThemeContext";
-import { useToast } from "@/context/ToastContext";
 import Animated, {
   SlideInDown,
   SlideInUp,
   SlideOutDown,
   SlideOutUp,
 } from "react-native-reanimated";
+
+export type ToastProps = {
+  message: string;
+  leftIcon?: ReactElement;
+  rightIcon?: ReactElement;
+  position?: "top" | "bottom";
+  containerStyle?: StyleProp<ViewStyle>;
+  contentContainerStyle?: StyleProp<ViewStyle>;
+  leftIconContainerStyle?: StyleProp<ViewStyle>;
+  textContainerStyle?: StyleProp<ViewStyle>;
+  textStyle?: StyleProp<TextStyle>;
+  rightIconContainerStyle?: StyleProp<ViewStyle>;
+  elevated?: boolean;
+  outlined?: boolean;
+  rounded?: boolean;
+  color?: string;
+  textColor?: string;
+  variant?: "primary" | "secondary" | "tertiary" | "success" | "error";
+} & PressableProps;
 
 const scaledSize = (baseSize: number) => {
   return Math.round(baseSize * PixelRatio.getFontScale());
@@ -28,27 +52,33 @@ const renderIcon = (icon: ReactElement, color: string) => {
   });
 };
 
-const Toast = () => {
+const Toast = ({
+  message,
+  leftIcon,
+  rightIcon,
+  position = "bottom",
+  containerStyle,
+  contentContainerStyle,
+  leftIconContainerStyle,
+  textContainerStyle,
+  textStyle,
+  rightIconContainerStyle,
+  elevated = false,
+  outlined = false,
+  rounded = false,
+  color: initialColor,
+  textColor: initialTextColor,
+  variant = "primary",
+  ...pressableProps
+}: ToastProps) => {
   const { theme } = useTheme();
   const insets = useSafeAreaInsets();
-  const {
-    isVisible,
-    message,
-    leftIcon,
-    rightIcon,
-    hideToast,
-    position,
-    containerStyle,
-    contentContainerStyle,
-    leftIconContainerStyle,
-    textContainerStyle,
-    textStyle,
-    rightIconContainerStyle,
-  } = useToast();
+  const [height, setHeight] = useState(0);
 
-  if (!isVisible) {
-    return null;
-  }
+  const onLayout = (event: LayoutChangeEvent) => {
+    const { height: componentHeight } = event.nativeEvent.layout;
+    setHeight(componentHeight);
+  };
 
   const offset = Platform.OS === "web" ? 20 : 0;
   const basePositionStyle =
@@ -61,27 +91,123 @@ const Toast = () => {
   const exitingAnimation =
     position === "top" ? SlideOutUp.duration(500) : SlideOutDown.duration(500);
 
+  // Calculated background color
+  const color = (() => {
+    if (initialColor) return initialColor;
+    if (outlined && !elevated) return theme.colors.background;
+    if (!elevated) {
+      switch (variant) {
+        case "success":
+          return theme.colors.success;
+        case "error":
+          return theme.colors.error;
+        case "primary":
+          return theme.colors.primary;
+        case "secondary":
+          return theme.colors.secondary;
+        case "tertiary":
+          return theme.colors.tertiary;
+        default:
+          return theme.colors.primary;
+      }
+    } else {
+      switch (variant) {
+        case "success":
+          return theme.colors.elevatedSuccess;
+        case "error":
+          return theme.colors.elevatedError;
+        case "primary":
+          return theme.colors.elevatedPrimary;
+        case "secondary":
+          return theme.colors.elevatedSecondary;
+        case "tertiary":
+          return theme.colors.elevatedTertiary;
+        default:
+          return theme.colors.elevatedPrimary;
+      }
+    }
+  })();
+
+  // Calculated text color
+  const textColor = (() => {
+    if (initialTextColor) return initialTextColor;
+    if (outlined || elevated) {
+      switch (variant) {
+        case "success":
+          return theme.colors.success;
+        case "error":
+          return theme.colors.error;
+        case "primary":
+          return theme.colors.primary;
+        case "secondary":
+          return theme.colors.secondary;
+        case "tertiary":
+          return theme.colors.tertiary;
+        default:
+          return theme.colors.primary;
+      }
+    }
+    switch (variant) {
+      case "success":
+        return theme.colors.onSuccess;
+      case "error":
+        return theme.colors.onError;
+      case "primary":
+        return theme.colors.onPrimary;
+      case "secondary":
+        return theme.colors.onSecondary;
+      case "tertiary":
+        return theme.colors.onTertiary;
+      default:
+        return theme.colors.onPrimary;
+    }
+  })();
+
+  const borderRadius = rounded ? height / 2 : 5;
+  const borderColor = (() => {
+    switch (variant) {
+      case "success":
+        return theme.colors.success;
+      case "error":
+        return theme.colors.error;
+      case "primary":
+        return theme.colors.primary;
+      case "secondary":
+        return theme.colors.secondary;
+      case "tertiary":
+        return theme.colors.tertiary;
+      default:
+        return theme.colors.primary;
+    }
+  })();
+
   return (
     <Animated.View
       entering={enteringAnimation}
       exiting={exitingAnimation}
       style={[
         styles.container,
-        {
-          backgroundColor: theme.colors.primary,
-          shadowColor: "rgb(0,0,0)",
+        { shadowColor: "black" },
+        { backgroundColor: color },
+        { borderRadius: borderRadius },
+        outlined && {
+          borderWidth: 1,
+          borderColor: borderColor,
         },
         basePositionStyle,
         containerStyle,
       ]}
     >
       <Pressable
+        onLayout={onLayout}
         style={[styles.pressableContent, contentContainerStyle]}
-        onPress={hideToast}
+        {...pressableProps}
       >
-        <View style={leftIconContainerStyle}>
-          {leftIcon && renderIcon(leftIcon, theme.colors.onPrimary)}
-        </View>
+        {leftIcon && (
+          <View style={leftIconContainerStyle}>
+            {renderIcon(leftIcon, textColor)}
+          </View>
+        )}
         <View
           style={[
             styles.textContainer,
@@ -90,20 +216,16 @@ const Toast = () => {
           ]}
         >
           {message != null && (
-            <Text
-              style={[
-                styles.text,
-                { color: theme.colors.onPrimary },
-                textStyle,
-              ]}
-            >
+            <Text style={[styles.text, { color: textColor }, textStyle]}>
               {message}
             </Text>
           )}
         </View>
-        <View style={rightIconContainerStyle}>
-          {rightIcon && renderIcon(rightIcon, theme.colors.onPrimary)}
-        </View>
+        {rightIcon && (
+          <View style={rightIconContainerStyle}>
+            {renderIcon(rightIcon, textColor)}
+          </View>
+        )}
       </Pressable>
     </Animated.View>
   );
@@ -114,16 +236,15 @@ const styles = StyleSheet.create({
     position: "absolute",
     left: 20,
     right: 20,
-    borderRadius: 5,
     elevation: 5,
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
+    shadowOpacity: 0.3,
   },
   pressableContent: {
-    padding: 10,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
+    padding: 10,
     width: "100%",
   },
   textContainer: {
@@ -133,7 +254,6 @@ const styles = StyleSheet.create({
   text: {
     fontWeight: "500",
     textAlign: "center",
-    marginHorizontal: 5,
   },
 });
 

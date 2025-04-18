@@ -3,7 +3,6 @@ import { Stack } from "expo-router";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { ThemeProvider, useTheme } from "@/context/ThemeContext";
 import { ToastProvider } from "@/context/ToastContext";
-import Toast from "@/components/Toast";
 
 function App() {
   const { theme } = useTheme();
@@ -39,7 +38,6 @@ function App() {
             options={{ title: "Not Found", headerShown: false }}
           />
         </Stack>
-        <Toast />
       </ToastProvider>
     </SafeAreaProvider>
   );

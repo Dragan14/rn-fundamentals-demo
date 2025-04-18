@@ -1,108 +1,60 @@
-import React, {
-  createContext,
-  useState,
-  useContext,
-  ReactNode,
-  ReactElement,
-  useEffect,
-} from "react";
-import { StyleProp, ViewStyle, TextStyle } from "react-native";
+import React, { createContext, useContext, useState, useRef } from "react";
+import Toast, { ToastProps } from "@/components/Toast";
 
-type ToastPosition = "top" | "bottom";
-
-interface ToastOptions {
-  message: string;
-  duration?: number;
-  leftIcon?: ReactElement;
-  rightIcon?: ReactElement;
-  position?: ToastPosition;
-  containerStyle?: StyleProp<ViewStyle>;
-  contentContainerStyle?: StyleProp<ViewStyle>;
-  leftIconContainerStyle?: StyleProp<ViewStyle>;
-  textContainerStyle?: StyleProp<ViewStyle>;
-  textStyle?: StyleProp<TextStyle>;
-  rightIconContainerStyle?: StyleProp<ViewStyle>;
+interface ToastItem {
+  id: number;
+  props: ToastProps;
 }
 
 interface ToastContextType {
-  showToast: (options: ToastOptions) => void;
+  showToast: (props: ToastProps, duration?: number) => void;
   hideToast: () => void;
-  isVisible: boolean;
-  message: string;
-  leftIcon?: ReactElement;
-  rightIcon?: ReactElement;
-  position: ToastPosition;
-  containerStyle?: StyleProp<ViewStyle>;
-  contentContainerStyle?: StyleProp<ViewStyle>;
-  leftIconContainerStyle?: StyleProp<ViewStyle>;
-  textContainerStyle?: StyleProp<ViewStyle>;
-  textStyle?: StyleProp<TextStyle>;
-  rightIconContainerStyle?: StyleProp<ViewStyle>;
 }
 
-const ToastContext = createContext<ToastContextType | undefined>(undefined);
+export const ToastContext = createContext<ToastContextType | undefined>(
+  undefined,
+);
 
-export const ToastProvider = ({ children }: { children: ReactNode }) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [message, setMessage] = useState("");
-  const [leftIcon, setLeftIcon] = useState<ReactElement | undefined>(undefined);
-  const [rightIcon, setRightIcon] = useState<ReactElement | undefined>(
-    undefined,
-  );
-  const [duration, setDuration] = useState(3000);
-  const [position, setPosition] = useState<ToastPosition>("bottom");
+export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  const [currentToast, setCurrentToast] = useState<ToastItem | null>(null);
+  const nextIdRef = useRef(0);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  useEffect(() => {
-    if (isVisible) {
-      setTimeout(() => {
+  const showToast = (props: ToastProps, duration: number = 3000) => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+    const id = nextIdRef.current++;
+    setCurrentToast({ id, props });
+    if (duration) {
+      timeoutRef.current = setTimeout(() => {
         hideToast();
       }, duration);
     }
-  }, [isVisible, duration]);
-
-  const showToast = ({
-    message,
-    duration = 3000,
-    leftIcon,
-    rightIcon,
-    position = "bottom",
-  }: ToastOptions) => {
-    setMessage(message);
-    setDuration(duration);
-    setLeftIcon(leftIcon);
-    setRightIcon(rightIcon);
-    setPosition(position);
-    setIsVisible(true);
   };
 
   const hideToast = () => {
-    setIsVisible(false);
-    setMessage("");
-    setLeftIcon(undefined);
-    setRightIcon(undefined);
-    setPosition("bottom");
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+    setCurrentToast(null);
   };
 
   return (
-    <ToastContext.Provider
-      value={{
-        showToast,
-        hideToast,
-        isVisible,
-        message,
-        leftIcon,
-        rightIcon,
-        position,
-      }}
-    >
+    <ToastContext.Provider value={{ showToast, hideToast }}>
       {children}
+      {currentToast && <Toast key={currentToast.id} {...currentToast.props} />}
     </ToastContext.Provider>
   );
 };
 
-export const useToast = (): ToastContextType => {
+export const useToast = () => {
   const context = useContext(ToastContext);
-  if (!context) {
+  if (context === undefined) {
     throw new Error("useToast must be used within a ToastProvider");
   }
   return context;
