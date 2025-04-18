@@ -32,6 +32,7 @@ export default function ToastScreen() {
               showToast({
                 message: "Top toast",
                 position: "top",
+                style: { width: 350 },
               })
             }
           >
@@ -42,6 +43,7 @@ export default function ToastScreen() {
               showToast({
                 message: "Bottom toast",
                 position: "bottom",
+                style: { width: 350 },
               })
             }
           >
@@ -60,6 +62,7 @@ export default function ToastScreen() {
                 message: "Primary Variant",
                 variant: "primary",
                 position: "top",
+                style: { width: 350 },
               })
             }
             variant="primary"
@@ -72,6 +75,7 @@ export default function ToastScreen() {
                 message: "Secondary variant",
                 variant: "secondary",
                 position: "top",
+                style: { width: 350 },
               })
             }
             variant="secondary"
@@ -84,6 +88,7 @@ export default function ToastScreen() {
                 message: "Tertiary variant",
                 variant: "tertiary",
                 position: "top",
+                style: { width: 350 },
               })
             }
             variant="tertiary"
@@ -96,6 +101,7 @@ export default function ToastScreen() {
                 message: "Success variant",
                 variant: "success",
                 position: "top",
+                style: { width: 350 },
               })
             }
             variant="success"
@@ -108,6 +114,7 @@ export default function ToastScreen() {
                 message: "Warning variant",
                 variant: "error",
                 position: "top",
+                style: { width: 350 },
               })
             }
             variant="error"
@@ -129,6 +136,7 @@ export default function ToastScreen() {
                 variant: "primary",
                 elevated: true,
                 position: "top",
+                style: { width: 350 },
               })
             }
             variant="primary"
@@ -143,6 +151,7 @@ export default function ToastScreen() {
                 variant: "secondary",
                 elevated: true,
                 position: "top",
+                style: { width: 350 },
               })
             }
             variant="secondary"
@@ -157,6 +166,7 @@ export default function ToastScreen() {
                 variant: "tertiary",
                 elevated: true,
                 position: "top",
+                style: { width: 350 },
               })
             }
             variant="tertiary"
@@ -171,6 +181,7 @@ export default function ToastScreen() {
                 variant: "success",
                 elevated: true,
                 position: "top",
+                style: { width: 350 },
               })
             }
             variant="success"
@@ -185,6 +196,7 @@ export default function ToastScreen() {
                 variant: "error",
                 elevated: true,
                 position: "top",
+                style: { width: 350 },
               })
             }
             variant="error"
@@ -207,6 +219,7 @@ export default function ToastScreen() {
                 variant: "primary",
                 outlined: true,
                 position: "top",
+                style: { width: 350 },
               })
             }
             variant="primary"
@@ -221,6 +234,7 @@ export default function ToastScreen() {
                 outlined: true,
                 elevated: true,
                 position: "top",
+                style: { width: 350 },
               })
             }
             outlined={true}
@@ -235,6 +249,7 @@ export default function ToastScreen() {
                 variant: "secondary",
                 outlined: true,
                 position: "top",
+                style: { width: 350 },
               })
             }
             variant="secondary"
@@ -249,6 +264,7 @@ export default function ToastScreen() {
                 variant: "tertiary",
                 outlined: true,
                 position: "top",
+                style: { width: 350 },
               })
             }
             variant="tertiary"
@@ -263,6 +279,7 @@ export default function ToastScreen() {
                 variant: "success",
                 outlined: true,
                 position: "top",
+                style: { width: 350 },
               })
             }
             variant="success"
@@ -277,6 +294,7 @@ export default function ToastScreen() {
                 variant: "error",
                 outlined: true,
                 position: "top",
+                style: { width: 350 },
               })
             }
             variant="error"
@@ -299,6 +317,7 @@ export default function ToastScreen() {
                 variant: "primary",
                 leftIcon: <PersonStanding />,
                 position: "top",
+                style: { width: 350 },
               })
             }
             variant="primary"
@@ -312,6 +331,7 @@ export default function ToastScreen() {
                 variant: "secondary",
                 rightIcon: <Camera />,
                 position: "top",
+                style: { width: 350 },
               })
             }
             variant="secondary"
@@ -326,6 +346,7 @@ export default function ToastScreen() {
                 leftIcon: <PersonStanding />,
                 rightIcon: <Camera />,
                 position: "top",
+                style: { width: 350 },
               })
             }
             variant="tertiary"
@@ -334,7 +355,7 @@ export default function ToastScreen() {
           </Button>
         </View>
 
-        <View style={{ gap: 10, width: 350 }}>
+        <View style={{ gap: 10, width: 350, marginBottom: 20 }}>
           <Text
             style={{ textAlign: "center", fontWeight: "bold", fontSize: 18 }}
           >
@@ -342,18 +363,25 @@ export default function ToastScreen() {
           </Text>
           <Button
             onPress={() =>
-              showToast({
-                message: "Click X to close",
-                variant: "primary",
-                rightIcon: <XCircle onPress={hideToast} />,
-                position: "top",
-                rightIconContainerStyle: {
-                  marginLeft: "auto",
+              showToast(
+                {
+                  color: "pink",
+                  textColor: "red",
+                  message: "Click X to close",
+                  leftIcon: <XCircle color={"transparent"} />,
+                  rightIcon: <XCircle onPress={hideToast} color={"red"} />,
+                  position: "top",
+                  textContainerStyle: {
+                    marginHorizontal: "auto",
+                  },
+                  style: {
+                    borderRadius: 20,
+                    minHeight: 100,
+                    width: 350,
+                  },
                 },
-                style: {
-                  borderRadius: 20,
-                },
-              })
+                10000000,
+              )
             }
             variant="primary"
           >

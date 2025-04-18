@@ -15,11 +15,13 @@ import {
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "@/context/ThemeContext";
 import Animated, {
+  runOnJS,
   SlideInDown,
   SlideInUp,
   SlideOutDown,
   SlideOutUp,
 } from "react-native-reanimated";
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
 
 export type ToastProps = {
   message: string;
@@ -37,6 +39,7 @@ export type ToastProps = {
   color?: string;
   textColor?: string;
   variant?: "primary" | "secondary" | "tertiary" | "success" | "error";
+  onDismiss?: () => void;
 } & PressableProps;
 
 const scaledSize = (baseSize: number) => {
@@ -66,6 +69,7 @@ const Toast = ({
   color: initialColor,
   textColor: initialTextColor,
   variant = "primary",
+  onDismiss,
   ...pressableProps
 }: ToastProps) => {
   const { theme } = useTheme();
@@ -171,52 +175,67 @@ const Toast = ({
     }
   })();
 
+  const panGesture = Gesture.Pan().onEnd((event) => {
+    const threshold = 5;
+    if (position === "top" && event.translationY < -threshold && onDismiss) {
+      runOnJS(onDismiss)();
+    } else if (
+      position === "bottom" &&
+      event.translationY > threshold &&
+      onDismiss
+    ) {
+      runOnJS(onDismiss)();
+    }
+  });
+
   return (
-    <Animated.View
-      entering={enteringAnimation}
-      exiting={exitingAnimation}
-      style={[
-        styles.container,
-        { shadowColor: "black" },
-        { backgroundColor: color },
-        { borderRadius: 5 },
-        outlined && {
-          borderWidth: 1,
-          borderColor: borderColor,
-        },
-        basePositionStyle,
-        style,
-      ]}
-    >
-      <Pressable
-        style={[styles.pressableContent, contentContainerStyle]}
-        {...pressableProps}
+    <GestureDetector gesture={panGesture}>
+      <Animated.View
+        entering={enteringAnimation}
+        exiting={exitingAnimation}
+        style={[
+          styles.container,
+          { shadowColor: theme.colors.onBackground },
+          { backgroundColor: color },
+          { borderRadius: 5 },
+          outlined && {
+            borderWidth: 1,
+            borderColor: borderColor,
+          },
+          basePositionStyle,
+          style,
+        ]}
       >
-        {leftIcon && (
-          <View style={leftIconContainerStyle}>
-            {renderIcon(leftIcon, textColor)}
-          </View>
-        )}
-        <View
-          style={[
-            styles.textContainer,
-            textContainerStyle,
-            !leftIcon && !rightIcon && { flex: 1 },
-          ]}
+        <Pressable
+          style={[styles.pressableContent, contentContainerStyle]}
+          {...pressableProps}
         >
-          {message != null && (
-            <Text style={[styles.text, { color: textColor }, textStyle]}>
-              {message}
-            </Text>
+          {leftIcon && (
+            <View style={leftIconContainerStyle}>
+              {renderIcon(leftIcon, textColor)}
+            </View>
           )}
-        </View>
-        {rightIcon && (
-          <View style={rightIconContainerStyle}>
-            {renderIcon(rightIcon, textColor)}
+          <View
+            style={[
+              styles.textContainer,
+              textContainerStyle,
+              !leftIcon && !rightIcon && { flex: 1 },
+            ]}
+          >
+            {message != null && (
+              <Text style={[styles.text, { color: textColor }, textStyle]}>
+                {message}
+              </Text>
+            )}
           </View>
-        )}
-      </Pressable>
-    </Animated.View>
+          {rightIcon && (
+            <View style={rightIconContainerStyle}>
+              {renderIcon(rightIcon, textColor)}
+            </View>
+          )}
+        </Pressable>
+      </Animated.View>
+    </GestureDetector>
   );
 };
 
@@ -227,7 +246,10 @@ const styles = StyleSheet.create({
     right: 20,
     elevation: 5,
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
+    shadowOpacity: 0.25,
+    justifyContent: "center",
+    alignItems: "center",
+    marginHorizontal: "auto",
   },
   pressableContent: {
     flexDirection: "row",

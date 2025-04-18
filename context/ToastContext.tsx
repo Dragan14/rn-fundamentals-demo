@@ -47,7 +47,13 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({
   return (
     <ToastContext.Provider value={{ showToast, hideToast }}>
       {children}
-      {currentToast && <Toast key={currentToast.id} {...currentToast.props} />}
+      {currentToast && (
+        <Toast
+          key={currentToast.id}
+          {...currentToast.props}
+          onDismiss={hideToast}
+        />
+      )}
     </ToastContext.Provider>
   );
 };
