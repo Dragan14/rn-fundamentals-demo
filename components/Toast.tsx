@@ -1,5 +1,5 @@
 // Toast.tsx
-import { useState, ReactElement, cloneElement } from "react";
+import { ReactElement, cloneElement } from "react";
 import {
   Text,
   Pressable,
@@ -7,7 +7,6 @@ import {
   StyleSheet,
   Platform,
   View,
-  LayoutChangeEvent,
   StyleProp,
   ViewStyle,
   TextStyle,
@@ -27,15 +26,14 @@ export type ToastProps = {
   leftIcon?: ReactElement;
   rightIcon?: ReactElement;
   position?: "top" | "bottom";
-  containerStyle?: StyleProp<ViewStyle>;
   contentContainerStyle?: StyleProp<ViewStyle>;
   leftIconContainerStyle?: StyleProp<ViewStyle>;
+  style?: StyleProp<ViewStyle>;
   textContainerStyle?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;
   rightIconContainerStyle?: StyleProp<ViewStyle>;
   elevated?: boolean;
   outlined?: boolean;
-  rounded?: boolean;
   color?: string;
   textColor?: string;
   variant?: "primary" | "secondary" | "tertiary" | "success" | "error";
@@ -57,15 +55,14 @@ const Toast = ({
   leftIcon,
   rightIcon,
   position = "bottom",
-  containerStyle,
   contentContainerStyle,
   leftIconContainerStyle,
+  style,
   textContainerStyle,
   textStyle,
   rightIconContainerStyle,
   elevated = false,
   outlined = false,
-  rounded = false,
   color: initialColor,
   textColor: initialTextColor,
   variant = "primary",
@@ -73,12 +70,6 @@ const Toast = ({
 }: ToastProps) => {
   const { theme } = useTheme();
   const insets = useSafeAreaInsets();
-  const [height, setHeight] = useState(0);
-
-  const onLayout = (event: LayoutChangeEvent) => {
-    const { height: componentHeight } = event.nativeEvent.layout;
-    setHeight(componentHeight);
-  };
 
   const offset = Platform.OS === "web" ? 20 : 0;
   const basePositionStyle =
@@ -163,7 +154,6 @@ const Toast = ({
     }
   })();
 
-  const borderRadius = rounded ? height / 2 : 5;
   const borderColor = (() => {
     switch (variant) {
       case "success":
@@ -189,17 +179,16 @@ const Toast = ({
         styles.container,
         { shadowColor: "black" },
         { backgroundColor: color },
-        { borderRadius: borderRadius },
+        { borderRadius: 5 },
         outlined && {
           borderWidth: 1,
           borderColor: borderColor,
         },
         basePositionStyle,
-        containerStyle,
+        style,
       ]}
     >
       <Pressable
-        onLayout={onLayout}
         style={[styles.pressableContent, contentContainerStyle]}
         {...pressableProps}
       >

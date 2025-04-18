@@ -4,10 +4,10 @@ import View from "@/components/View";
 import Text from "@/components/Text";
 import Button from "@/components/Button";
 import { useToast } from "@/context/ToastContext";
-import { Camera, PersonStanding } from "lucide-react-native";
+import { Camera, PersonStanding, XCircle } from "lucide-react-native";
 
 export default function ToastScreen() {
-  const { showToast } = useToast();
+  const { showToast, hideToast } = useToast();
 
   return (
     <SafeAreaView disableTopSafeArea={true}>
@@ -334,25 +334,30 @@ export default function ToastScreen() {
           </Button>
         </View>
 
-        <View style={{ gap: 10, width: 350, marginBottom: 20 }}>
+        <View style={{ gap: 10, width: 350 }}>
           <Text
             style={{ textAlign: "center", fontWeight: "bold", fontSize: 18 }}
           >
-            Rounded Toast
+            Customisation Example
           </Text>
           <Button
             onPress={() =>
               showToast({
-                message: "Rounded toast message",
-                variant: "success",
-                rounded: true,
-                leftIcon: <PersonStanding />,
+                message: "Click X to close",
+                variant: "primary",
+                rightIcon: <XCircle onPress={hideToast} />,
                 position: "top",
+                rightIconContainerStyle: {
+                  marginLeft: "auto",
+                },
+                style: {
+                  borderRadius: 20,
+                },
               })
             }
-            variant="success"
+            variant="primary"
           >
-            Show Rounded Toast
+            Show Toast
           </Button>
         </View>
       </ScrollView>
