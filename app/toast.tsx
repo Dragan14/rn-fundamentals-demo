@@ -21,6 +21,9 @@ export default function ToastScreen() {
           alignItems: "center",
         }}
       >
+        <Text style={{ textAlign: "center", fontWeight: "500", fontSize: 14 }}>
+          FYI: You can also swipe up/down to dismiss the toast
+        </Text>
         <View style={{ gap: 10, width: 350 }}>
           <Text
             style={{ textAlign: "center", fontWeight: "bold", fontSize: 18 }}
@@ -375,8 +378,8 @@ export default function ToastScreen() {
                     marginHorizontal: "auto",
                   },
                   style: {
-                    borderRadius: 20,
-                    minHeight: 100,
+                    borderRadius: 25,
+                    minHeight: 50,
                     width: 350,
                   },
                 },

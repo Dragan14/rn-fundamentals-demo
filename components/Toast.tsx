@@ -175,6 +175,7 @@ const Toast = ({
     }
   })();
 
+  // Gesture handling for dismissing the toast
   const panGesture = Gesture.Pan().onEnd((event) => {
     const threshold = 5;
     if (position === "top" && event.translationY < -threshold && onDismiss) {
@@ -195,7 +196,7 @@ const Toast = ({
         exiting={exitingAnimation}
         style={[
           styles.container,
-          { shadowColor: theme.colors.onBackground },
+          { shadowColor: "black" },
           { backgroundColor: color },
           { borderRadius: 5 },
           outlined && {
@@ -246,7 +247,7 @@ const styles = StyleSheet.create({
     right: 20,
     elevation: 5,
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
+    shadowOpacity: 0.5,
     justifyContent: "center",
     alignItems: "center",
     marginHorizontal: "auto",
@@ -263,7 +264,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 4,
   },
   text: {
-    fontWeight: "500",
     textAlign: "center",
   },
 });
