@@ -18,6 +18,7 @@ import {
   ActivityIndicator,
   PixelRatio,
   LayoutChangeEvent,
+  Platform,
 } from "react-native";
 import { useTheme } from "@/context/ThemeContext";
 
@@ -272,5 +273,10 @@ const styles = StyleSheet.create({
   text: {
     fontWeight: "500",
     textAlign: "center",
+    ...Platform.select({
+      web: {
+        wordBreak: "break-word",
+      },
+    }),
   },
 });

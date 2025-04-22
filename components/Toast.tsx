@@ -265,6 +265,12 @@ const styles = StyleSheet.create({
   },
   text: {
     textAlign: "center",
+    flexWrap: "wrap",
+    ...Platform.select({
+      web: {
+        wordBreak: "break-word",
+      },
+    }),
   },
 });
 
