@@ -250,7 +250,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     justifyContent: "center",
     alignItems: "center",
-    marginHorizontal: "auto",
+    alignSelf: "center",
   },
   pressableContent: {
     flexDirection: "row",
