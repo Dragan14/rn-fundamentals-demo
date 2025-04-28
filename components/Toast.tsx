@@ -243,8 +243,7 @@ const Toast = ({
 const styles = StyleSheet.create({
   container: {
     position: "absolute",
-    left: 20,
-    right: 20,
+    marginHorizontal: 20,
     elevation: 5,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.5,
