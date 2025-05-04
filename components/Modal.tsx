@@ -7,6 +7,7 @@ import {
   ViewStyle,
   Pressable,
   View,
+  Platform,
 } from "react-native";
 import { useTheme } from "@/context/ThemeContext";
 
@@ -60,7 +61,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   modalContainer: {
-    alignSelf: "stretch",
+    ...(Platform.OS === "web" ? { width: "100%" } : { alignSelf: "stretch" }),
     marginHorizontal: 20,
     maxWidth: 500,
     maxHeight: "80%",
