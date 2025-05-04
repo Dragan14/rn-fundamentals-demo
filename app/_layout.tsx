@@ -40,7 +40,7 @@ function App() {
               />
               <Stack.Screen name="switch" options={{ title: "Switch" }} />
               <Stack.Screen name="toast" options={{ title: "Toast" }} />
-              <Stack.Screen name="modal" options={{ title: "Modal" }} />{" "}
+              <Stack.Screen name="modal" options={{ title: "Modal" }} />
               <Stack.Screen
                 name="+not-found"
                 options={{ title: "Not Found", headerShown: false }}

@@ -4,6 +4,7 @@ import { StyleProp, ViewStyle } from "react-native";
 
 interface ModalOptions {
   style?: StyleProp<ViewStyle>;
+  dismissOnBackdropPress?: boolean;
 }
 
 interface ModalContextType {
@@ -37,6 +38,7 @@ export const ModalProvider: React.FC<{ children: ReactNode }> = ({
         visible={isVisible}
         onDismiss={hideModal}
         style={modalOptions.style}
+        dismissOnBackdropPress={modalOptions.dismissOnBackdropPress}
       >
         {modalContent}
       </Modal>

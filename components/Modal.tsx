@@ -15,9 +15,16 @@ export type ModalProps = {
   onDismiss: () => void;
   children?: ReactNode;
   style: StyleProp<ViewStyle>;
+  dismissOnBackdropPress?: boolean;
 };
 
-const Modal = ({ visible, onDismiss, children, style }: ModalProps) => {
+const Modal = ({
+  visible,
+  onDismiss,
+  children,
+  style,
+  dismissOnBackdropPress = false,
+}: ModalProps) => {
   const { theme } = useTheme();
 
   return (
@@ -27,7 +34,10 @@ const Modal = ({ visible, onDismiss, children, style }: ModalProps) => {
       visible={visible}
       onRequestClose={onDismiss}
     >
-      <Pressable style={styles.backdrop} onPress={onDismiss}>
+      <Pressable
+        style={styles.backdrop}
+        onPress={dismissOnBackdropPress ? onDismiss : undefined}
+      >
         <View
           style={[
             styles.modalContainer,
