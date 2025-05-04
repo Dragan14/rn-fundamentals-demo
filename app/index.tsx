@@ -88,6 +88,16 @@ export default function Home() {
               Toast
             </Button>
           </Link>
+          <Link href="/modal" asChild>
+            <Button
+              style={{
+                width: 350,
+                marginHorizontal: "auto",
+              }}
+            >
+              Modal
+            </Button>
+          </Link>
         </View>
       </ScrollView>
     </SafeAreaView>
