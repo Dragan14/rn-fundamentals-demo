@@ -4,7 +4,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { ThemeProvider, useTheme } from "@/context/ThemeContext";
 import { ToastProvider } from "@/context/ToastContext";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { ModalProvider } from "@/context/ModalContext";
+import { AlertProvider } from "@/context/AlertContext";
 
 function App() {
   const { theme } = useTheme();
@@ -12,7 +12,7 @@ function App() {
     <SafeAreaProvider>
       <GestureHandlerRootView style={{ flex: 1 }}>
         <ToastProvider>
-          <ModalProvider>
+          <AlertProvider>
             <StatusBar backgroundColor={theme.colors.background} />
             <Stack
               screenOptions={{
@@ -40,13 +40,13 @@ function App() {
               />
               <Stack.Screen name="switch" options={{ title: "Switch" }} />
               <Stack.Screen name="toast" options={{ title: "Toast" }} />
-              <Stack.Screen name="modal" options={{ title: "Modal" }} />
+              <Stack.Screen name="alert" options={{ title: "Alert" }} />
               <Stack.Screen
                 name="+not-found"
                 options={{ title: "Not Found", headerShown: false }}
               />
             </Stack>
-          </ModalProvider>
+          </AlertProvider>
         </ToastProvider>
       </GestureHandlerRootView>
     </SafeAreaProvider>

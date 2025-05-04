@@ -88,14 +88,14 @@ export default function Home() {
               Toast
             </Button>
           </Link>
-          <Link href="/modal" asChild>
+          <Link href="/alert" asChild>
             <Button
               style={{
                 width: 350,
                 marginHorizontal: "auto",
               }}
             >
-              Modal
+              Alert
             </Button>
           </Link>
         </View>

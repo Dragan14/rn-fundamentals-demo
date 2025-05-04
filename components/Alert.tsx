@@ -1,7 +1,7 @@
-// Modal.tsx
+// Alert.tsx
 import { ReactNode } from "react";
 import {
-  Modal as RNModal,
+  Modal,
   StyleSheet,
   StyleProp,
   ViewStyle,
@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { useTheme } from "@/context/ThemeContext";
 
-export type ModalProps = {
+export type AlertProps = {
   visible: boolean;
   onDismiss: () => void;
   children?: ReactNode;
@@ -19,17 +19,17 @@ export type ModalProps = {
   dismissOnBackdropPress?: boolean;
 };
 
-const Modal = ({
+const Alert = ({
   visible,
   onDismiss,
   children,
   style,
   dismissOnBackdropPress = false,
-}: ModalProps) => {
+}: AlertProps) => {
   const { theme } = useTheme();
 
   return (
-    <RNModal
+    <Modal
       animationType="fade"
       transparent={true}
       visible={visible}
@@ -41,7 +41,7 @@ const Modal = ({
       >
         <View
           style={[
-            styles.modalContainer,
+            styles.alertContainer,
             { backgroundColor: theme.colors.background },
             style,
           ]}
@@ -49,7 +49,7 @@ const Modal = ({
           {children}
         </View>
       </Pressable>
-    </RNModal>
+    </Modal>
   );
 };
 
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  modalContainer: {
+  alertContainer: {
     ...(Platform.OS === "web" ? { width: "100%" } : { alignSelf: "stretch" }),
     marginHorizontal: 20,
     maxWidth: 500,
@@ -74,6 +74,6 @@ const styles = StyleSheet.create({
   },
 });
 
-Modal.displayName = "Modal";
+Alert.displayName = "Alert";
 
-export default Modal;
+export default Alert;

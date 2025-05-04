@@ -4,12 +4,10 @@ import SafeAreaView from "@/components/SafeAreaView";
 import View from "@/components/View";
 import Text from "@/components/Text";
 import Button from "@/components/Button";
-import { useModal } from "@/context/ModalContext";
-import { useTheme } from "@/context/ThemeContext";
+import { useAlert } from "@/context/AlertContext";
 
-export default function ModalScreen() {
-  const { showModal, hideModal } = useModal();
-  const { theme } = useTheme();
+export default function AlertScreen() {
+  const { showAlert, hideAlert } = useAlert();
 
   return (
     <SafeAreaView disableTopSafeArea={true}>
@@ -27,11 +25,11 @@ export default function ModalScreen() {
           <Text
             style={{ textAlign: "center", fontWeight: "bold", fontSize: 18 }}
           >
-            Modal
+            Alert
           </Text>
           <Button
             onPress={() => {
-              showModal(
+              showAlert(
                 <View style={{ gap: 10 }}>
                   <Text
                     style={{
@@ -40,7 +38,7 @@ export default function ModalScreen() {
                       fontWeight: "bold",
                     }}
                   >
-                    This is a basic modal
+                    This is a basic alert
                   </Text>
                   <View
                     style={{
@@ -49,7 +47,7 @@ export default function ModalScreen() {
                     }}
                   >
                     <Button
-                      onPress={hideModal}
+                      onPress={hideAlert}
                       variant="secondary"
                       outlined
                       style={{ flex: 1 }}
@@ -57,7 +55,7 @@ export default function ModalScreen() {
                       Cancel
                     </Button>
                     <Button
-                      onPress={hideModal}
+                      onPress={hideAlert}
                       variant="primary"
                       style={{ flex: 1 }}
                     >
@@ -68,11 +66,11 @@ export default function ModalScreen() {
               );
             }}
           >
-            Show Modal
+            Show Alert
           </Button>
           <Button
             onPress={() => {
-              showModal(
+              showAlert(
                 <View style={{ gap: 10 }}>
                   <Text
                     style={{
@@ -82,14 +80,14 @@ export default function ModalScreen() {
                     }}
                     variant="error"
                   >
-                    Click on the backdrop of this modal to dismiss it
+                    Click on the backdrop of this alert to dismiss it
                   </Text>
                 </View>,
                 { dismissOnBackdropPress: true },
               );
             }}
           >
-            Show Modal with Backdrop Dismiss
+            Show Alert with Backdrop Dismiss
           </Button>
         </View>
       </ScrollView>
