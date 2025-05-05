@@ -4,8 +4,12 @@ import SafeAreaView from "@/components/SafeAreaView";
 import Button from "@/components/Button";
 import Text from "@/components/Text";
 import View from "@/components/View";
+import RadioButton from "@/components/RadioButton";
+import { useTheme } from "@/context/ThemeContext";
 
 export default function Home() {
+  const { themeMode, setThemeMode } = useTheme();
+
   return (
     <SafeAreaView>
       <ScrollView
@@ -28,6 +32,26 @@ export default function Home() {
           >
             React Native Fundamental Components
           </Text>
+          <View style={{ gap: 5, alignItems: "flex-start", paddingLeft: 10 }}>
+            <Text style={{ fontWeight: "bold", marginBottom: 5 }}>
+              Select Theme:
+            </Text>
+            <RadioButton
+              label="Light"
+              value={themeMode === "light"}
+              onValueChange={() => setThemeMode("light")}
+            />
+            <RadioButton
+              label="Dark"
+              value={themeMode === "dark"}
+              onValueChange={() => setThemeMode("dark")}
+            />
+            <RadioButton
+              label="System"
+              value={themeMode === "system"}
+              onValueChange={() => setThemeMode("system")}
+            />
+          </View>
           <Link href="/text" asChild>
             <Button
               style={{
