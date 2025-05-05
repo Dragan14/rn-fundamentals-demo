@@ -42,6 +42,10 @@ function App() {
               <Stack.Screen name="toast" options={{ title: "Toast" }} />
               <Stack.Screen name="alert" options={{ title: "Alert" }} />
               <Stack.Screen
+                name="radiobutton"
+                options={{ title: "Radio Button" }}
+              />
+              <Stack.Screen
                 name="+not-found"
                 options={{ title: "Not Found", headerShown: false }}
               />

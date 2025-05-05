@@ -98,6 +98,16 @@ export default function Home() {
               Alert
             </Button>
           </Link>
+          <Link href="/radiobutton" asChild>
+            <Button
+              style={{
+                width: 350,
+                marginHorizontal: "auto",
+              }}
+            >
+              Radio Button
+            </Button>
+          </Link>
         </View>
       </ScrollView>
     </SafeAreaView>
