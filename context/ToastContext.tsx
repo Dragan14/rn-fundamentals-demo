@@ -1,13 +1,23 @@
 import React, { createContext, useContext, useState, useRef } from "react";
 import Toast, { ToastProps } from "@/components/Toast";
 
+/**
+ * Represents a single toast notification item with its unique ID and props.
+ */
 interface ToastItem {
+  /** Unique identifier for the toast item. */
   id: number;
+  /** Props passed to the Toast component. */
   props: ToastProps;
 }
 
+/**
+ * Defines the shape of the Toast context.
+ */
 interface ToastContextType {
+  /** Function to display a toast notification. */
   showToast: (props: ToastProps, duration?: number) => void;
+  /** Function to hide the currently displayed toast notification. */
   hideToast: () => void;
 }
 

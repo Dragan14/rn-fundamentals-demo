@@ -22,23 +22,41 @@ import {
 } from "react-native";
 import { useTheme } from "@/context/ThemeContext";
 
-// Button props type
+/**
+ * Props for the Button component.
+ */
 type ButtonProps = {
+  /** Text content of the button. */
   children?: string;
+  /** Custom background color for the button. Overrides variant colors. */
   color?: string;
+  /** Custom text color for the button. Overrides variant text colors. */
   textColor?: string;
+  /** Icon element to display on the left side of the button text. */
   leftIcon?: ReactElement;
+  /** Icon element to display on the right side of the button text. */
   rightIcon?: ReactElement;
+  /** If true, displays an ActivityIndicator instead of the button content. */
   loading?: boolean;
+  /** Style for the outer Pressable component. */
   style?: StyleProp<ViewStyle>;
+  /** Style for the container view wrapping the text content. */
   textContainerStyle?: StyleProp<ViewStyle>;
+  /** Style for the inner view wrapping all content (icons and text). */
   contentContainerStyle?: StyleProp<ViewStyle>;
+  /** Style for the view wrapping the left icon. */
   leftIconContainerStyle?: StyleProp<ViewStyle>;
+  /** Style for the view wrapping the right icon. */
   rightIconContainerStyle?: StyleProp<ViewStyle>;
+  /** Style for the button text. */
   textStyle?: StyleProp<TextStyle>;
+  /** If true, applies a circular border radius based on the button height. */
   rounded?: boolean;
+  /** If true, applies an outline style with a transparent background and colored border. */
   outlined?: boolean;
+  /** If true, applies an elevated style (often a lighter background based on the variant). */
   elevated?: boolean;
+  /** Predefined style variant for the button. Affects background and text color. Defaults to 'primary'. */
   variant?: "primary" | "secondary" | "tertiary" | "success" | "error";
 } & PressableProps;
 

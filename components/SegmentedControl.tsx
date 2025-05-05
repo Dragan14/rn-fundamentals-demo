@@ -20,15 +20,27 @@ import {
 } from "react-native";
 import { useTheme } from "@/context/ThemeContext";
 
+/**
+ * Props for the SegmentedControl component.
+ */
 interface SegmentedControlProps {
+  /** An array of React elements (e.g., Text, Icon, or Fragments) representing the content of each segment/tab. */
   values: ReactElement[];
+  /** An array of indices representing the currently selected segments. */
   selectedIndices: number[];
+  /** Callback function invoked when a tab is pressed, receiving the index of the pressed tab. */
   onTabPress: (index: number) => void;
+  /** Style for the outer container View. */
   style?: StyleProp<ViewStyle>;
+  /** Style applied to each individual tab Pressable. */
   tabStyle?: StyleProp<ViewStyle>;
+  /** Style applied specifically to the active/selected tabs, overriding parts of `tabStyle`. */
   activeTabStyle?: StyleProp<ViewStyle>;
+  /** Style applied specifically to the inactive/unselected tabs, overriding parts of `tabStyle`. */
   inactiveTabStyle?: StyleProp<ViewStyle>;
+  /** If true, applies a circular border radius based on the component height. Defaults to false (uses a fixed radius). */
   rounded?: boolean;
+  /** If true, disables interaction with all tabs. */
   disabled?: boolean;
 }
 

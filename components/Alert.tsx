@@ -11,11 +11,19 @@ import {
 } from "react-native";
 import { useTheme } from "@/context/ThemeContext";
 
+/**
+ * Props for the Alert component.
+ */
 export type AlertProps = {
+  /** Whether the alert is visible. */
   visible: boolean;
+  /** Function called when the alert is dismissed. */
   onDismiss: () => void;
+  /** Content to display inside the alert. */
   children?: ReactNode;
+  /** Custom style for the alert container. */
   style: StyleProp<ViewStyle>;
+  /** Whether the alert can be dismissed by pressing the backdrop. Defaults to false. */
   dismissOnBackdropPress?: boolean;
 };
 

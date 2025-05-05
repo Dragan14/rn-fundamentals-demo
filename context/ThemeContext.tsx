@@ -5,10 +5,17 @@ import { blueLight, blueDark } from "../themes/blue-theme";
 type ThemeType = typeof blueLight;
 type ThemeMode = "light" | "dark" | "system";
 
+/**
+ * Defines the shape of the Theme context.
+ */
 interface ThemeContextType {
+  /** The current theme object containing color definitions. */
   theme: ThemeType;
+  /** Boolean indicating if the current theme is dark. */
   isDark: boolean;
+  /** The currently selected theme mode ('light', 'dark', or 'system'). */
   themeMode: ThemeMode;
+  /** Function to set the desired theme mode. */
   setThemeMode: (mode: ThemeMode) => void;
 }
 

@@ -12,13 +12,23 @@ import {
 } from "react-native";
 import { useTheme } from "@/context/ThemeContext";
 
+/**
+ * Props for the RadioButton component.
+ */
 type RadioButtonProps = {
+  /** The current state of the radio button (true for selected, false for unselected). */
   value: boolean;
+  /** Callback function invoked when the radio button's state changes. */
   onValueChange: (value: boolean) => void;
+  /** Optional label text displayed next to the radio button. */
   label?: string;
+  /** If true, the radio button is disabled and cannot be interacted with. */
   disabled?: boolean;
+  /** Custom color for the radio button (border and inner circle). Overrides theme color. */
   color?: string;
+  /** Style for the outer container Pressable. */
   style?: StyleProp<ViewStyle>;
+  /** Style for the label text. */
   labelStyle?: StyleProp<TextStyle>;
 } & Omit<PressableProps, "onPress">;
 

@@ -9,10 +9,16 @@ import {
 } from "react-native";
 import { useTheme } from "@/context/ThemeContext";
 
-// Text props type
+/**
+ * Props for the Text component.
+ * Extends the standard React Native TextProps.
+ */
 type TextProps = {
+  /** The content to be rendered inside the Text component. */
   children: ReactNode;
+  /** Custom style for the Text component. */
   style?: StyleProp<TextStyle>;
+  /** Predefined color variant for the text. Affects text color. Defaults to 'default'. */
   variant?:
     | "default"
     | "primary"
@@ -20,8 +26,11 @@ type TextProps = {
     | "tertiary"
     | "error"
     | "success";
+  /** Custom text color. Overrides variant colors. */
   color?: string;
+  /** If true, renders the text as a Pressable with underline on hover/press. Requires `onPress`. */
   link?: boolean;
+  /** If true, disables the text (and the Pressable if `link` is true). */
   disabled?: boolean;
 } & RNTextProps;
 

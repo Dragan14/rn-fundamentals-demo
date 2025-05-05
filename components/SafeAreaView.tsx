@@ -8,11 +8,20 @@ import { View, ViewStyle, StyleSheet } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "@/context/ThemeContext";
 
+/**
+ * Props for the SafeAreaView component.
+ * Extends ViewStyle to allow direct style application.
+ */
 type SafeAreaViewProps = {
+  /** If true, disables safe area padding at the bottom. */
   disableBottomSafeArea?: boolean;
+  /** If true, disables safe area padding at the top. */
   disableTopSafeArea?: boolean;
+  /** If true, disables safe area padding on the left and right sides. */
   disableSidesSafeArea?: boolean;
+  /** The content to be rendered within the safe area view. */
   children: ReactNode;
+  /** Custom style for the outer View component. */
   style?: ViewStyle;
 } & ViewStyle;
 

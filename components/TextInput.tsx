@@ -22,25 +22,46 @@ import {
 } from "react-native";
 import { useTheme } from "@/context/ThemeContext";
 
-// TextInput props type
+/**
+ * Props for the TextInput component.
+ * Extends the standard React Native TextInputProps.
+ */
 type TextInputProps = {
+  /** Label text displayed above the input field (moves inside the border on focus/value). */
   topLabel?: string;
+  /** Label text displayed to the left of the input field, inside the border. */
   leftLabel?: string;
+  /** Icon element displayed on the left side, inside the border. */
   leftIcon?: ReactElement;
+  /** Icon element displayed on the right side, inside the border. */
   rightIcon?: ReactElement;
+  /** If true, applies error styling (e.g., red border). */
   error?: boolean;
+  /** Error message text displayed below the input field when `error` is true. */
   errorMessage?: string;
+  /** If true, reserves space below the input field for the error message even when there is no error. Defaults to true. */
   retainErrorMessageSpace?: boolean;
+  /** Visual variant of the input field. 'outlined' (default), 'solid', or 'clear'. */
   variant?: "clear" | "outlined" | "solid";
+  /** If true, displays a character counter below the input field (requires `maxLength`). */
   counter?: boolean;
+  /** Maximum number of characters allowed in the input. Used by the `counter`. */
   maxLength?: number;
+  /** Style for the outermost container View. */
   style?: StyleProp<ViewStyle>;
+  /** Style for the actual RNTextInput component. */
   textStyle?: StyleProp<TextStyle>;
+  /** Style for the top label Text component. */
   topLabelStyle?: StyleProp<TextStyle>;
+  /** Style for the left label Text component. */
   leftLabelStyle?: StyleProp<TextStyle>;
+  /** Style for the main container View that includes the border and background. */
   containerStyle?: StyleProp<ViewStyle>;
+  /** Style for the View wrapping the left icon. */
   leftIconStyle?: StyleProp<ViewStyle>;
+  /** Style for the View wrapping the right icon. */
   rightIconStyle?: StyleProp<ViewStyle>;
+  /** If true, disables the text input and applies disabled styling. */
   disabled?: boolean;
 } & RNTextInputProps;
 

@@ -6,7 +6,12 @@ import {
 } from "react-native";
 import { useTheme } from "@/context/ThemeContext";
 
+/**
+ * Props for the Switch component.
+ * Extends the standard React Native SwitchProps.
+ */
 type SwitchProps = {
+  /** Predefined style variant for the switch. Affects track and thumb colors. Defaults to 'primary'. */
   variant?: "primary" | "secondary" | "tertiary" | "error" | "success";
 } & RNSwitchProps;
 

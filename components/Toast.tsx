@@ -23,22 +23,42 @@ import Animated, {
 } from "react-native-reanimated";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 
+/**
+ * Props for the Toast component.
+ * Extends the standard React Native PressableProps.
+ */
 export type ToastProps = {
+  /** The message text to display in the toast. */
   message: string;
+  /** Icon element to display on the left side of the toast message. */
   leftIcon?: ReactElement;
+  /** Icon element to display on the right side of the toast message. */
   rightIcon?: ReactElement;
+  /** Position where the toast appears ('top' or 'bottom'). Defaults to 'bottom'. */
   position?: "top" | "bottom";
+  /** Style for the inner Pressable content container. */
   contentContainerStyle?: StyleProp<ViewStyle>;
+  /** Style for the view wrapping the left icon. */
   leftIconContainerStyle?: StyleProp<ViewStyle>;
+  /** Style for the outer Animated.View container. */
   style?: StyleProp<ViewStyle>;
+  /** Style for the view wrapping the text message. */
   textContainerStyle?: StyleProp<ViewStyle>;
+  /** Style for the message text. */
   textStyle?: StyleProp<TextStyle>;
+  /** Style for the view wrapping the right icon. */
   rightIconContainerStyle?: StyleProp<ViewStyle>;
+  /** If true, applies an elevated style (often a lighter background based on the variant). */
   elevated?: boolean;
+  /** If true, applies an outline style with a background matching the screen and colored border. */
   outlined?: boolean;
+  /** Custom background color for the toast. Overrides variant colors. */
   color?: string;
+  /** Custom text color for the toast message. Overrides variant text colors. */
   textColor?: string;
+  /** Predefined style variant for the toast. Affects background and text color. Defaults to 'primary'. */
   variant?: "primary" | "secondary" | "tertiary" | "success" | "error";
+  /** Callback function invoked when the toast is dismissed (e.g., by swipe gesture or timeout). */
   onDismiss?: () => void;
 } & PressableProps;
 
