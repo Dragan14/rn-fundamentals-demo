@@ -7,13 +7,16 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { AlertProvider } from "@/context/AlertContext";
 
 function App() {
-  const { theme } = useTheme();
+  const { theme, themeMode } = useTheme();
   return (
     <SafeAreaProvider>
       <GestureHandlerRootView style={{ flex: 1 }}>
         <ToastProvider>
           <AlertProvider>
-            <StatusBar backgroundColor={theme.colors.background} />
+            <StatusBar
+              style={themeMode === "dark" ? "light" : "dark"}
+              backgroundColor={theme.colors.background}
+            />
             <Stack
               screenOptions={{
                 navigationBarColor: theme.colors.background,

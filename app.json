@@ -5,11 +5,11 @@
     "scheme": "rn-fundamentals-demo",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/rn-fundamentals-logo.png",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/splash-icon.png",
+      "image": "./assets/rn-fundamentals-logo.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -19,15 +19,30 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/rn-fundamentals-logo.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.dragan14.rnfundamentalsdemo"
     },
     "web": {
-      "favicon": "./assets/favicon.png",
+      "favicon": "./assets/rn-fundamentals-logo.png",
       "bundler": "metro"
     },
-    "plugins": ["expo-router"]
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/rn-fundamentals-logo.png",
+          "backgroundColor": "#fbfcff",
+          "dark": {
+            "image": "./assets/rn-fundamentals-logo.png",
+            "backgroundColor": "#1a1c1e"
+          },
+          "imageWidth": 200,
+          "resizeMode": "contain"
+        }
+      ]
+    ]
   }
 }
