@@ -5,9 +5,11 @@ import { ThemeProvider, useTheme } from "@/context/ThemeContext";
 import { ToastProvider } from "@/context/ToastContext";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { AlertProvider } from "@/context/AlertContext";
+import * as NavigationBar from "expo-navigation-bar";
 
 function App() {
   const { theme, themeMode } = useTheme();
+  NavigationBar.setBackgroundColorAsync(theme.colors.background);
   return (
     <SafeAreaProvider>
       <GestureHandlerRootView style={{ flex: 1 }}>
