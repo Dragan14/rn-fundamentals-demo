@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "rn-fundamentals-demo",
-    "slug": "rn-fundamentals-demo",
-    "scheme": "rn-fundamentals-demo",
+    "name": "react-native-fundamentals-demo",
+    "slug": "react-native-fundamentals-demo",
+    "scheme": "react-native-fundamentals-demo",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/rn-fundamentals-logo.png",
+    "icon": "./assets/react-native-fundamentals-logo.png",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/rn-fundamentals-logo.png",
+      "image": "./assets/react-native-fundamentals-logo.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -19,13 +19,13 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/rn-fundamentals-logo.png",
+        "foregroundImage": "./assets/react-native-fundamentals-logo.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.dragan14.rnfundamentalsdemo"
     },
     "web": {
-      "favicon": "./assets/rn-fundamentals-logo.png",
+      "favicon": "./assets/react-native-fundamentals-logo.png",
       "bundler": "metro"
     },
     "plugins": [
@@ -33,10 +33,10 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/rn-fundamentals-logo.png",
+          "image": "./assets/react-native-fundamentals-logo.png",
           "backgroundColor": "#fbfcff",
           "dark": {
-            "image": "./assets/rn-fundamentals-logo.png",
+            "image": "./assets/react-native-fundamentals-logo.png",
             "backgroundColor": "#1a1c1e"
           },
           "imageWidth": 200,

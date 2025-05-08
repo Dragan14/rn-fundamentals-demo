@@ -30,7 +30,7 @@ export default function Home() {
               textAlign: "center",
             }}
           >
-            React Native Fundamental Components
+            React Native Fundamentals
           </Text>
           <View style={{ gap: 5, alignItems: "flex-start", paddingLeft: 10 }}>
             <Text style={{ fontWeight: "bold", marginBottom: 5 }}>

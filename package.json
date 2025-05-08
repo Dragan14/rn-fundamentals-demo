@@ -1,5 +1,5 @@
 {
-  "name": "rn-fundamentals-demo",
+  "name": "react-native-fundamentals-demo",
   "version": "1.0.0",
   "main": "expo-router/entry",
   "scripts": {
