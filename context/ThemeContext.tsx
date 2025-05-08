@@ -1,6 +1,6 @@
 import { useColorScheme } from "react-native";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { blueLight, blueDark } from "../themes/blue-theme";
+import { blueLight, blueDark } from "../themes/theme";
 
 type ThemeType = typeof blueLight;
 type ThemeMode = "light" | "dark" | "system";
