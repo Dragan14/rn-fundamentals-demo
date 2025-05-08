@@ -81,7 +81,7 @@ const renderElement = (element: ReactElement, color: string): ReactElement => {
   }
 };
 
-export const SegmentedControl = ({
+const SegmentedControl = ({
   values,
   selectedIndices,
   onTabPress,
@@ -158,6 +158,10 @@ export const SegmentedControl = ({
     </View>
   );
 };
+
+SegmentedControl.displayName = "SegmentedControl";
+
+export default SegmentedControl;
 
 const styles = StyleSheet.create({
   container: {
